@@ -1,0 +1,74 @@
+<nav class="navbar" th:fragment="navbar">
+    <div class="navbar-container">
+        <!-- Brand -->
+        <div class="navbar-brand">
+            <a href="index.html" class="navbar-logo-link">
+                <img src="images/canteen logo.jpg" alt="Canteen Logo" class="navbar-logo">
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="navbar-menu">
+            <a href="home" class="navbar-link active" data-page="home">Home</a>
+            <a href="order" class="navbar-link" data-page="orders">Orders</a>
+            <a href="wishlist" class="navbar-link" data-page="wishlist">
+                WishList
+                <span class="badge badge-primary wishlist-count hidden">0</span>
+            </a>
+            <a href="history" class="navbar-link" data-page="history">History</a>
+        </div>
+
+        <!-- Search -->
+        <div class="navbar-search">
+            <input type="search" class="navbar-search-input" placeholder="Search items..." id="navbar-search">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Actions -->
+        <div class="navbar-actions">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon theme-toggle-icon" id="theme-icon"></i>
+            </button>
+
+            <!-- Cart -->
+            <a href="order" class="btn btn-primary btn-sm cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-primary cart-count hidden">0</span>
+            </a>
+
+            <!-- Login/Profile -->
+            <a id="login-register-href" href="login" class="btn btn-secondary btn-sm login-btn">
+                <i class="fas fa-user"></i>
+                <span class="login-text" id="login-register-click">Login</span>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="navbar-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="navbar-mobile-menu">
+        <a href="home" class="navbar-mobile-link active" data-page="home">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="order" class="navbar-mobile-link" data-page="orders">
+            <i class="fas fa-shopping-bag"></i> Orders
+        </a>
+        <a href="wishlist" class="navbar-mobile-link" data-page="wishlist">
+            <i class="fas fa-heart"></i> WishList
+        </a>
+        <a href="history" class="navbar-mobile-link" data-page="history">
+            <i class="fas fa-history"></i> History
+        </a>
+        <hr class="HR">
+        <a href="login" class="navbar-mobile-link">
+            <i class="fas fa-user"></i> Login
+        </a>
+    </div>
+</nav>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Canteen Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <section th:replace="~{navbar :: navbar}"></section>
+
+    <!-- Wishlist Section -->
+    <div class="container" style="padding-top: var(--spacing-3xl);">
+        <!-- Section Header -->
+        <div class="section-header">
+            <div>
+                <h1>My Wishlist</h1>
+                <p>Save your favorite items for later</p>
+            </div>
+            <div class="section-header-actions">
+                <button class="btn btn-danger btn-sm" id="clear-wishlist">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <div class="category-filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="burger">Burger</button>
+                <button class="filter-btn" data-filter="food">Food</button>
+                <button class="filter-btn" data-filter="juice">Juice</button>
+                <button class="filter-btn" data-filter="chocolate">Chocolate</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="wishlist-grid">
+            <!-- Product 1: Burger -->
+            <div class="product-card" data-category="burger" data-id="1" data-price="20" data-name="Burger">
+                <div class="product-image">
+                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-craig-122861-376464.jpg&fm=jpg" alt="Burger">
+                    <span class="product-badge">Popular</span>
+                    <button class="product-wishlist wishlist-btn active" data-id="1" data-price="20" data-name="Burger">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Burger</p>
+                    <h3 class="product-name">Classic Burger</h3>
+                    <p class="product-description">Delicious burger with fresh vegetables and special sauce</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹20</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="1" data-price="20" data-name="Burger">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2: Soup -->
+            <div class="product-card" data-category="food" data-id="2" data-price="80" data-name="Soop">
+                <div class="product-image">
+                    <img src="https://plus.unsplash.com/premium_photo-1694547926001-f2151e4a476b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fHww" alt="Soup">
+                    <button class="product-wishlist wishlist-btn active" data-id="2" data-price="80" data-name="Soop">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Food</p>
+                    <h3 class="product-name">Special Soup</h3>
+                    <p class="product-description">Hot and delicious soup with fresh ingredients</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹80</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="2" data-price="80" data-name="Soop">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3: Premium Burger -->
+            <div class="product-card" data-category="burger" data-id="3" data-price="100" data-name="Burger">
+                <div class="product-image">
+                    <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Ch=1335%2Cq=85%2Cw=2000/wp-content/uploads/national-fast-food-day.jpg" alt="Premium Burger">
+                    <span class="product-badge">Premium</span>
+                    <button class="product-wishlist wishlist-btn active" data-id="3" data-price="100" data-name="Burger">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Burger</p>
+                    <h3 class="product-name">Premium Burger</h3>
+                    <p class="product-description">Double patty burger with cheese and special sauce</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹100</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="3" data-price="100" data-name="Burger">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4: Chocolate -->
+            <div class="product-card" data-category="chocolate" data-id="4" data-price="120" data-name="Chocolate">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Chocolate">
+                    <button class="product-wishlist wishlist-btn active" data-id="4" data-price="120" data-name="Chocolate">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Chocolate</p>
+                    <h3 class="product-name">Delicious Chocolate</h3>
+                    <p class="product-description">Premium chocolate with rich cocoa flavor</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹120</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="4" data-price="120" data-name="Chocolate">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5: Food -->
+            <div class="product-card" data-category="food" data-id="5" data-price="60" data-name="Food">
+                <div class="product-image">
+                    <img src="https://img.freepik.com/free-photo/assortment-indian-dishes-platter_23-2152002848.jpg?semt=ais_hybrid&w=740&q=80" alt="Food">
+                    <span class="product-badge">Bestseller</span>
+                    <button class="product-wishlist wishlist-btn active" data-id="5" data-price="60" data-name="Food">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Food</p>
+                    <h3 class="product-name">Indian Thali</h3>
+                    <p class="product-description">Complete meal with variety of dishes</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹60</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="5" data-price="60" data-name="Food">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6: Chocolate 2 -->
+            <div class="product-card" data-category="chocolate" data-id="6" data-price="120" data-name="Chocolate2">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Chocolate">
+                    <button class="product-wishlist wishlist-btn active" data-id="6" data-price="120" data-name="Chocolate2">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">Chocolate</p>
+                    <h3 class="product-name">Dark Chocolate</h3>
+                    <p class="product-description">Rich dark chocolate with 70% cocoa</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹120</span>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn" data-id="6" data-price="120" data-name="Chocolate2">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state hidden" id="empty-wishlist">
+            <i class="fas fa-heart fa-3x"></i>
+            <h3>Your wishlist is empty</h3>
+            <p>Save your favorite items by clicking the heart icon</p>
+            <a href="index.html" class="btn btn-primary">Browse Menu</a>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+918889414008">+91 8889414008</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:collegecanteen@gmail.com">collegecanteen@gmail.com</a>
+                    </p>
+                </div>
+
+                <!-- Canteen Info -->
+                <div class="footer-section">
+                    <h3>About Canteen</h3>
+                    <p>
+                        Your favorite campus canteen serving delicious food 
+                        with love and care.
+                    </p>
+                </div>
+
+                <!-- Opening Hours -->
+                <div class="footer-section">
+                    <h3>Opening Hours</h3>
+                    <p><i class="fas fa-clock"></i> Everyday</p>
+                    <p>09:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Canteen Management System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modular JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCards = document.querySelectorAll('.product-card');
+            const wishlistGrid = document.getElementById('wishlist-grid');
+            const emptyWishlist = document.getElementById('empty-wishlist');
+            const clearWishlistBtn = document.getElementById('clear-wishlist');
+
+            // Category filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                            card.classList.add('animate-fadeIn');
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Wishlist search functionality
+            const searchInput = document.getElementById('wishlist-search');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                
+                productCards.forEach(card => {
+                    const name = card.querySelector('.product-name').textContent.toLowerCase();
+                    const category = card.querySelector('.product-category').textContent.toLowerCase();
+                    
+                    if (name.includes(query) || category.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Wishlist toggle (remove from wishlist)
+            document.querySelectorAll('.wishlist-btn.active').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = btn.closest('.product-card');
+                    const id = parseInt(card.dataset.id);
+                    
+                    if (confirm('Remove this item from wishlist?')) {
+                        wishlist.removeItem(id);
+                        card.remove();
+                        toast.success('Item removed from wishlist');
+                        
+                        // Check if wishlist is empty
+                        if (wishlistGrid.children.length === 0) {
+                            wishlistGrid.classList.add('hidden');
+                            emptyWishlist.classList.remove('hidden');
+                        }
+                    }
+                });
+            });
+
+            // Add to cart from wishlist
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = btn.closest('.product-card');
+                    const id = parseInt(card.dataset.id);
+                    const price = parseFloat(card.dataset.price);
+                    const name = card.dataset.name;
+                    
+                    cart.addItem(id, price, name, 1);
+                    toast.success('Item added to cart');
+                });
+            });
+
+            // Clear all wishlist
+            clearWishlistBtn.addEventListener('click', () => {
+                if (confirm('Clear all items from wishlist?')) {
+                    wishlist.clear();
+                    productCards.forEach(card => card.remove());
+                    wishlistGrid.classList.add('hidden');
+                    emptyWishlist.classList.remove('hidden');
+                    toast.success('Wishlist cleared');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

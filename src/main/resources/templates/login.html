@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Canteen Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <section th:replace="~{navbar :: navbar}"></section>
+
+    <!-- Login Section -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Login to your account to continue</p>
+            </div>
+
+            <form class="auth-form" id="login-form" data-validate>
+                <!-- Username -->
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="auth-input-group">
+                        <input type="text" 
+                               class="form-input" 
+                               id="username" 
+                               name="username" 
+                               placeholder="Enter your username"
+                               required>
+                        <i class="fas fa-user auth-input-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="auth-input-group">
+                        <input type="password" 
+                               class="form-input" 
+                               id="password" 
+                               name="password" 
+                               placeholder="Enter your password"
+                               required>
+                        <i class="fas fa-eye auth-input-icon password-toggle"></i>
+                    </div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex-between mb-2">
+                    <label class="form-checkbox">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm">Forgot password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="auth-submit-btn" data-loading="Logging in...">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+
+                <!-- Divider -->
+                <div class="auth-divider">or continue with</div>
+
+                <!-- Social Login -->
+                <div class="auth-social-login">
+                    <button type="button" class="auth-google-btn">
+                        <img src="https://www.google.com/favicon.ico" alt="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+
+                <!-- Register Link -->
+                <div class="auth-footer">
+                    Don't have an account? 
+                    <a href="register">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+918889414008">+91 8889414008</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:collegecanteen@gmail.com">collegecanteen@gmail.com</a>
+                    </p>
+                </div>
+
+                <!-- Canteen Info -->
+                <div class="footer-section">
+                    <h3>About Canteen</h3>
+                    <p>
+                        Your favorite campus canteen serving delicious food 
+                        with love and care.
+                    </p>
+                </div>
+
+                <!-- Opening Hours -->
+                <div class="footer-section">
+                    <h3>Opening Hours</h3>
+                    <p><i class="fas fa-clock"></i> Everyday</p>
+                    <p>09:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Canteen Management System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modular JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Login form handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Simulate login (replace with actual API call)
+                toast.info('Logging in...');
+                
+                setTimeout(() => {
+                    // Demo login validation
+                    if (username && password) {
+                        toast.success('Login successful!');
+                        // Redirect to home page after successful login
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000);
+                    } else {
+                        toast.error('Invalid username or password');
+                    }
+                }, 1500);
+            });
+
+            // Google login button (UI only - backend OAuth required)
+            const googleBtn = document.querySelector('.auth-google-btn');
+            googleBtn.addEventListener('click', () => {
+                toast.info('Google OAuth integration required for backend');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

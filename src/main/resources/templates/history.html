@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Canteen Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    
+    <!-- Navbar Component -->
+    <section th:replace="~{navbar :: navbar}"></section>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="container dashboard-header-content">
+                <div class="dashboard-title">
+                    <h1>Order History</h1>
+                    <p>View your past orders and their status</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="container">
+            <!-- History Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Orders</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% this month
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Completed</div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8% this month
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon error">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Failed</div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 5% this month
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon info">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Spent</div>
+                        <div class="stat-value">₹180</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 15% this month
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="dashboard-main">
+                <div class="section-header">
+                    <h2>Order History</h2>
+                    <div class="section-header-actions">
+                        <select class="form-select" style="width: auto;">
+                            <option value="all">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Item Name</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="completed">
+                                <td>#ORD-001</td>
+                                <td>
+                                    <div class="flex-center" style="gap: var(--spacing-sm);">
+                                        <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
+                                        <span>Indian Thali</span>
+                                    </div>
+                                </td>
+                                <td>₹60</td>
+                                <td>Oct 05, 2025</td>
+                                <td>
+                                    <span class="order-status completed">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </td>
+                            </tr>
+                            <tr data-status="failed">
+                                <td>#ORD-002</td>
+                                <td>
+                                    <div class="flex-center" style="gap: var(--spacing-sm);">
+                                        <i class="fas fa-hamburger" style="color: var(--primary-color);"></i>
+                                        <span>Burger</span>
+                                    </div>
+                                </td>
+                                <td>₹60</td>
+                                <td>Oct 05, 2025</td>
+                                <td>
+                                    <span class="order-status cancelled">
+                                        <i class="fas fa-times-circle"></i> Failed
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </td>
+                            </tr>
+                            <tr data-status="completed">
+                                <td>#ORD-003</td>
+                                <td>
+                                    <div class="flex-center" style="gap: var(--spacing-sm);">
+                                        <i class="fas fa-pizza-slice" style="color: var(--primary-color);"></i>
+                                        <span>Pizza</span>
+                                    </div>
+                                </td>
+                                <td>₹60</td>
+                                <td>Oct 05, 2025</td>
+                                <td>
+                                    <span class="order-status completed">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state hidden" id="empty-history">
+                    <i class="fas fa-inbox fa-3x"></i>
+                    <h3>No Order History</h3>
+                    <p>You haven't placed any orders yet</p>
+                    <a href="index.html" class="btn btn-primary">Browse Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+918889414008">+91 8889414008</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:collegecanteen@gmail.com">collegecanteen@gmail.com</a>
+                    </p>
+                </div>
+
+                <!-- Canteen Info -->
+                <div class="footer-section">
+                    <h3>About Canteen</h3>
+                    <p>
+                        Your favorite campus canteen serving delicious food 
+                        with love and care.
+                    </p>
+                </div>
+
+                <!-- Opening Hours -->
+                <div class="footer-section">
+                    <h3>Opening Hours</h3>
+                    <p><i class="fas fa-clock"></i> Everyday</p>
+                    <p>09:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Canteen Management System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modular JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // History search functionality
+            const searchInput = document.getElementById('history-search');
+            const tableRows = document.querySelectorAll('.table tbody tr');
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    
+                    if (text.includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            // Filter functionality
+            const filterSelect = document.querySelector('.form-select');
+            filterSelect.addEventListener('change', (e) => {
+                const filter = e.target.value;
+                
+                tableRows.forEach(row => {
+                    const status = row.dataset.status;
+                    
+                    if (filter === 'all' || status === filter) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            // View button functionality
+            document.querySelectorAll('.table .btn-outline').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toast.info('Order details modal would open here');
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

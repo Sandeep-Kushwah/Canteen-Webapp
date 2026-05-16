@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Canteen Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <section th:replace="~{navbar :: navbar}"></section>
+
+    <!-- Payment Section -->
+    <div class="auth-container">
+        <div class="auth-card payment-card">
+            <div class="auth-header">
+                <h1>Payment</h1>
+                <p>Complete your payment securely</p>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="payment-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Item Name</span>
+                    <span id="summary-item">Classic Burger</span>
+                </div>
+                <div class="summary-item">
+                    <span>Quantity</span>
+                    <span id="summary-quantity">1</span>
+                </div>
+                <div class="summary-item">
+                    <span>Price</span>
+                    <span id="summary-price">₹20</span>
+                </div>
+                <hr class="HR">
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span id="summary-total" class="total-amount">₹20</span>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <h3>Payment Method</h3>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="upi" checked>
+                        <div class="payment-option-content">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>UPI</span>
+                        </div>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="card">
+                        <div class="payment-option-content">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Credit/Debit Card</span>
+                        </div>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="cash">
+                        <div class="payment-option-content">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Cash on Delivery</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- UPI Payment Form -->
+            <div class="payment-form" id="upi-form">
+                <div class="form-group">
+                    <label class="form-label" for="upi-id">UPI ID</label>
+                    <div class="auth-input-group">
+                        <input type="text" 
+                               class="form-input" 
+                               id="upi-id" 
+                               placeholder="Enter your UPI ID (e.g., name@upi)"
+                               required>
+                        <i class="fas fa-at auth-input-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Payment Form -->
+            <div class="payment-form hidden" id="card-form">
+                <div class="form-group">
+                    <label class="form-label" for="card-number">Card Number</label>
+                    <div class="auth-input-group">
+                        <input type="text" 
+                               class="form-input" 
+                               id="card-number" 
+                               placeholder="1234 5678 9012 3456"
+                               maxlength="19"
+                               required>
+                        <i class="fas fa-credit-card auth-input-icon"></i>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="expiry">Expiry Date</label>
+                        <div class="auth-input-group">
+                            <input type="text" 
+                                   class="form-input" 
+                                   id="expiry" 
+                                   placeholder="MM/YY"
+                                   maxlength="5"
+                                   required>
+                            <i class="fas fa-calendar auth-input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cvv">CVV</label>
+                        <div class="auth-input-group">
+                            <input type="password" 
+                                   class="form-input" 
+                                   id="cvv" 
+                                   placeholder="123"
+                                   maxlength="3"
+                                   required>
+                            <i class="fas fa-lock auth-input-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cash on Delivery Message -->
+            <div class="payment-form hidden" id="cash-form">
+                <div class="cash-message">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Pay with cash when your order is delivered. Please keep exact change ready.</p>
+                </div>
+            </div>
+
+            <!-- Pay Button -->
+            <button class="auth-submit-btn" id="pay-btn">
+                <i class="fas fa-lock"></i>
+                Pay Now
+            </button>
+
+            <!-- Cancel Button -->
+            <div class="auth-footer">
+                <a href="order.html" class="cancel-link">
+                    <i class="fas fa-arrow-left"></i> Back to Orders
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modular JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemName = urlParams.get('item') || 'Classic Burger';
+            const price = urlParams.get('price') || '20';
+            const quantity = urlParams.get('quantity') || '1';
+            const total = parseInt(price) * parseInt(quantity);
+
+            // Update summary
+            document.getElementById('summary-item').textContent = itemName;
+            document.getElementById('summary-quantity').textContent = quantity;
+            document.getElementById('summary-price').textContent = '₹' + price;
+            document.getElementById('summary-total').textContent = '₹' + total;
+
+            // Payment method toggle
+            const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+            const upiForm = document.getElementById('upi-form');
+            const cardForm = document.getElementById('card-form');
+            const cashForm = document.getElementById('cash-form');
+
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', (e) => {
+                    upiForm.classList.add('hidden');
+                    cardForm.classList.add('hidden');
+                    cashForm.classList.add('hidden');
+
+                    if (e.target.value === 'upi') {
+                        upiForm.classList.remove('hidden');
+                    } else if (e.target.value === 'card') {
+                        cardForm.classList.remove('hidden');
+                    } else if (e.target.value === 'cash') {
+                        cashForm.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Card number formatting
+            const cardNumberInput = document.getElementById('card-number');
+            cardNumberInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                e.target.value = formattedValue;
+            });
+
+            // Expiry date formatting
+            const expiryInput = document.getElementById('expiry');
+            expiryInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                e.target.value = value;
+            });
+
+            // Pay button
+            const payBtn = document.getElementById('pay-btn');
+            payBtn.addEventListener('click', () => {
+                const selectedMethod = document.querySelector('input[name="payment-method"]:checked').value;
+                
+                if (selectedMethod === 'upi') {
+                    const upiId = document.getElementById('upi-id').value;
+                    if (!upiId || !upiId.includes('@')) {
+                        toast.error('Please enter a valid UPI ID');
+                        return;
+                    }
+                } else if (selectedMethod === 'card') {
+                    const cardNumber = document.getElementById('card-number').value;
+                    const expiry = document.getElementById('expiry').value;
+                    const cvv = document.getElementById('cvv').value;
+                    
+                    if (cardNumber.length < 19 || expiry.length < 5 || cvv.length < 3) {
+                        toast.error('Please fill in all card details');
+                        return;
+                    }
+                }
+
+                // Simulate payment processing
+                payBtn.disabled = true;
+                payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                
+                setTimeout(() => {
+                    toast.success('Payment successful! Order placed.');
+                    setTimeout(() => {
+                        window.location.href = 'history.html';
+                    }, 1500);
+                }, 2000);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

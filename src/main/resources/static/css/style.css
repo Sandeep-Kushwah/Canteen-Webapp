@@ -1,0 +1,862 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: auto;
+    width: 100%;
+    scroll-behavior: smooth;
+}
+
+
+.container {
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+    /* filter: blur(5px); */
+}
+
+/* starting of navbar css */
+nav {
+    height: 70px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 5px 0px black;
+    position: fixed;
+    z-index: 2;
+}
+
+.left_box {
+    display: flex;
+}
+
+.logo {
+    width: 90px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo_img {
+    background-repeat: no-repeat;
+    /* width: 100%; */
+    height: 100%;
+}
+
+.li {
+    margin-left: 30px;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ul {
+    /* color: black; */
+    margin: 20px;
+}
+
+
+.links {
+    /* font-weight: 550; */
+    color: rgb(20, 33, 61);
+    font-size: 20px;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.196);
+    background-color: whitesmoke;
+    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
+    transition: 0.3s ease;
+}
+
+.links:hover {
+    background-color: rgb(252, 163, 17, 0.500);
+}
+
+/* to change click link navbar button color */
+.active {
+    background-color: rgb(252, 163, 17, 0.500);
+}
+
+
+.center_box {
+    display: flex;
+    align-items: center;
+}
+
+#search {
+    height: 40px;
+    width: 350px;
+    border: none;
+    background: whitesmoke;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 0px 3px black;
+    transition: 0.3s ease;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#search:hover {
+    /* font-size: 15px; */
+    background: rgb(229, 229, 229);
+}
+
+.right_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login {
+    margin-right: 50px;
+}
+
+#fake_navbar {
+    width: 100%;
+    height: 70px;
+}
+
+/* Ending of navbar css */
+
+
+/* starting of big poster css */
+.poster_div {
+    width: 100%;
+    height: 70vh;
+    /* background-color: palevioletred; */
+    /* position: relative; */
+    background-image: url("/assets/images/hero-bg.jpg");
+    background-position: center;
+}
+
+.text_content {
+    width: 20%;
+    padding-top: 30vh;
+    margin-left: 250px;
+}
+
+.text_content pre {
+    font-weight: 500;
+    font-size: 50px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#order_now {
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 1px 1px 3px rgb(255, 255, 255);
+    background: rgb(252, 163, 17);
+    transition: 0.3s ease;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#order_now:hover {
+    font-weight: 500;
+    color: black;
+
+    background: whitesmoke;
+}
+
+/* Ending of big poster css */
+
+.categories {
+    width: 100%;
+    height: 70px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 3px black;
+}
+
+.filter_btn {
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    border: none;
+    background-color: whitesmoke;
+    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
+    margin-left: 50px;
+    transition: 0.3s ease;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.535);
+}
+
+.filter_btn:hover {
+    background: rgba(252, 162, 17, 0.500);
+}
+
+.filter-active {
+    background-color: rgb(252, 163, 17, 0.500);
+}
+
+#menu_page {
+    width: 100%;
+    /* height: auto; */
+    /* position: relative; */
+    background-color: white;
+}
+
+.products_div {
+    width: 80%;
+    /* height: 1000px; */
+    margin-left: 10%;
+    /* background-color: lightcoral; */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.items {
+    height: 350px;
+    width: 250px;
+    margin: 30px;
+    border-radius: 20px;
+    /* background-color: brown; */
+    /* position: absolute; */
+    z-index: 0;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px black;
+}
+
+.item_photo {
+    height: 250px;
+    width: 100%;
+    background: palegreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item_img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item_dtls .item_name {
+    height: 40px;
+    width: 100%;
+    /* background-color: brown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item_btns {
+    box-shadow: 6px 6px 6px 4px black;
+}
+
+.item_name h2 {
+    padding-left: 20px;
+    padding-right: 30px;
+    font-size: large;
+}
+
+.item_name h3 {
+    padding-right: 30px;
+}
+
+
+.item_btns {
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item_heart_btn {
+    /* height: 20px;
+    width: 50px; */
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color: white;
+}
+
+.fa-heart {
+    font-size: 25px;
+}
+
+.item_order_btn {
+    height: 30px;
+    width: 60px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 1px 1px 2px black;
+    background-color: rgb(252, 163, 17);
+    font-size: 16px;
+}
+
+
+.item_order_btn:hover {
+    background: rgba(252, 162, 17, 0.7);
+}
+
+.item_order_btn.active {
+    color: white;
+    background-color: rgba(0, 128, 0, 0.9);
+    /* content: "Clli"; */
+}
+
+
+/* .item_order_btn::after {
+    content: "Click me";
+} */
+
+
+.wishlist {
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: black;
+    /* outline color */
+}
+
+.wishlist.active {
+    color: green;
+    BACKGROUND-COLOR: #00000000;
+}
+
+@media (max-width: 1000px) {
+
+    .center_box,
+    .right_box {
+        visibility: hidden;
+    }
+}
+
+/* staring of footer section */
+footer {
+    height: 350px;
+    width: 100%;
+    color: white;
+    background-color: #222831;
+    text-align: center;
+    padding-top: 50px;
+    z-index: 0;
+}
+
+.contante {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-us,
+.canteen,
+.opening_hours {
+    font-size: large;
+    height: 200px;
+    width: 300px;
+    margin-left: 20px;
+    /* background: brown; */
+}
+
+.anchor {
+    color: white;
+    text-decoration: none;
+}
+
+.anchor:hover {
+    color: rgb(252, 163, 17);
+}
+
+/* ending of footer section */
+
+
+/* Login page and register page css starting */
+
+.login-poster {
+    height: 100%;
+    width: 100%;
+    /* background-color: pink; */
+    background-image: url("/assets/images/pre-prepared-food-showcasing-ready-eat-delicious-meals-go.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+}
+
+.login_div {
+    height: 600px;
+    width: 100%;
+    /* margin-left: 15%; */
+    /* background-color: yellow; */
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#flex-form-div {
+    display: flex;
+    justify-content: center;
+}
+
+.forEye , .login_div input{
+    height: 45px;
+    width: 300px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    padding: 15px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 1px 2px black;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.login_div input:focus {
+    outline: none;
+}
+
+.login_btn {
+    font-size: large;
+    color: white;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(252, 163, 17, 0.6);
+    transition: 0.2s ease;
+}
+
+#register_btn {
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#register-form p{
+    font-size: 20px;
+}
+
+#login_btn:hover {
+    background-color: rgb(252, 163, 17);
+}
+
+#error-of-login {
+    color: yellow;
+
+    text-shadow:
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5);
+    font-weight: 400;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-bottom: 8px;
+    /* visibility: hidden; */
+}
+
+#error-of-register {
+    color: yellow;
+
+    text-shadow:
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5),
+        0 0 1px rgba(255, 0, 0, 0.5);
+    font-weight: 400;
+    margin-left: 40px;
+    margin-bottom: 30px;
+    /* visibility: hidden; */
+}
+
+.login_div p {
+    margin-left: 40px;
+    color: white;
+}
+
+.login_div a {
+    color: white;
+    font-size: large;
+    text-shadow:
+        0 0 1px wheat,
+        0 0 2px wheat,
+        0 0 4px wheat,
+        0 0 8px wheat;
+}
+
+.login_div a:hover {
+    color: rgb(252, 163, 17);
+}
+
+.x-for-register{
+    font-size: 18px;
+}
+
+/* register page validate color */
+
+#cap,#special,#number,#length{
+    color: red;
+}
+
+.forEye{
+    display: flex;
+    position: relative;
+    padding: 0;
+}
+
+.forEye #password{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.forEye i{
+    position: fixed;
+    /* background-color: burlywood; */
+    margin-left: 270px;
+    margin-top: 14px;
+    opacity: 60%;
+    cursor: pointer;
+    /* padding: 2px;
+    z-index: 5; */
+}
+
+
+
+
+
+/* login page and register page css ending */
+
+
+
+/* fixed box css  staring  */
+.fixed_suggestion {
+    height: 150px;
+    width: 40%;
+    background-color: white;
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 10px black;
+    position: fixed;
+    bottom: 20px;
+    left: 30%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected_items {
+    width: 70%;
+    height: 110px;
+    margin-left: 20px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    /* background: green; */
+}
+
+.buy_btn {
+    width: 30%;
+    height: auto;
+    text-align: center;
+    /* background: orchid; */
+    padding-bottom: 35px;
+}
+
+.selected_items_total {
+    display: flex;
+    justify-content: space-between;
+    font-size: x-large;
+    padding-left: 30px;
+    padding-right: 150px;
+}
+
+.price_tick {
+    display: flex;
+}
+
+.price_tick i {
+    color: green;
+}
+
+.buykaro {
+    height: 45px;
+    width: 120px;
+    border: none;
+    background-color: rgb(252, 163, 17);
+    /* border: 1px solid black; */
+    box-shadow: 1px 1px 2px black;
+    border-radius: 25px;
+}
+
+.buykaro:hover {
+    background-color: rgba(252, 162, 17, 0.7);
+}
+
+.hidden {
+    display: none;
+    /* visibility: hidden; */
+}
+
+/* fixed box css ending */
+
+
+/* Starting of payment page/ */
+
+.fixed_payment_box {
+    height: auto;
+    width: 40%;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 10px black;
+    position: fixed;
+    bottom: 15%;
+    left: 30%;
+    border-radius: 30px;
+    overflow: hidden;
+    /* padding: 10px; */
+}
+
+/* .payment_upper_div{
+    width: 100%;
+    height: auto;
+} */
+
+.payment_lower_div {
+    width: 100%;
+    height: 200px;
+    /* background-color: gray; */
+}
+
+
+/* starting of main boss payment */
+
+
+#payment-popup {
+    /*Section of payment */
+    color: brown;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background-color: pink; */
+    z-index: 2;
+    backdrop-filter: blur(5px);
+}
+
+.payment_option {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.payment_option label img {
+    height: 30px;
+}
+
+.radio {
+    /* display: none; */
+    opacity: 90%;
+    filter: blur(1px);
+    width: 20px;
+    height: 20px;
+}
+
+.payment_btn {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-btn {
+    text-align: end;
+    padding-bottom: 10px;
+}
+
+.cancel-btn i:hover {
+    color: rgb(231, 0, 0, 0.8);
+}
+
+.order-cancel {
+    padding-right: 15px;
+    padding-bottom: 18px;
+}
+
+/* Ending of payment page */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Style of order.html starting */
+
+#papa-hu-papa {
+    padding-top: 100px;
+}
+
+.Order_details {
+    width: 70vw;
+    margin-left: 15%;
+    /* margin-top: 100px; */
+    margin-bottom: 60px;
+    height: 200px;
+    /* 20vh*/
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.39);
+}
+
+.Order_image_container {
+    height: 100%;
+    width: 12vw;
+    background-color: rgb(4, 82, 150);
+    /* object-position:center; */
+}
+
+.Order_image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Order_description {
+    height: 100%;
+    width: 100%;
+    background: blueviolet;
+}
+
+.upper_div {
+    width: 100%;
+    height: 40%;
+    background-color: white;
+    box-shadow: 0px 0px 5px 0px black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item_name_in_order {
+    margin-left: 20px;
+    opacity: 80%;
+}
+
+.item_name_in_order h1 {
+    font-family: "MV Boli";
+    /* margin-top: 50px; */
+    /* background-color: red; */
+    height: 40px;
+}
+
+.item_name_in_order p {
+    font-family: "MV Boli";
+    /* background-color: greenyellow; */
+}
+
+.delete_btn {
+    margin-right: 20px;
+    margin-bottom: 25px;
+    /* height: 50px;
+            width: 50px; */
+    /* background-color: goldenrod; */
+}
+
+.cross {
+    font-size: 30px;
+    opacity: 60%;
+}
+
+.cross:hover {
+    color: rgb(252, 163, 17);
+    opacity: 80%;
+}
+
+.lower_div {
+    width: 100%;
+    height: 60%;
+    background-color: white;
+}
+
+.process_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40%;
+    width: 100%;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.left_tick {
+    margin-left: 100px;
+    color: #4da325;
+}
+
+.left_date {
+    margin-left: 100px;
+}
+
+.process_line {
+    width: 78%;
+    height: 4px;
+    background-color: rgba(128, 128, 128, 0.521);
+    /* background-color: #4da3258b; if order is completed */
+    /*#4CBB17*/
+}
+
+.right_tick {
+    margin-right: 100px;
+    text-align: end;
+    color: rgba(128, 128, 128, 0.521);
+}
+
+.right_date {
+    margin-right: 100px;
+    text-align: end;
+}
+
+.confirmation_date {
+    display: flex;
+    height: 60%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* jab lower_div completed ho
+.lower_div.completed .left_tick i,
+.lower_div.completed .right_tick i {
+    color: green;
+}
+
+.lower_div.completed .process_line {
+    background-color: green;
+} */
+
+
+/* Style of order.html ending */
