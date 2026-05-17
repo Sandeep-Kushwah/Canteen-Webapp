@@ -178,11 +178,21 @@
     color: var(--primary-color);
 }
 
+
 .footer-section p,
 .footer-section a {
     color: var(--text-light);
     margin-bottom: var(--spacing-sm);
     transition: color var(--transition-fast);
+}
+
+
+#footer-quick-links{
+    display: flex;
+}
+
+#footer-quick-links p{
+    padding: 10px;
 }
 
 .footer-section a:hover {

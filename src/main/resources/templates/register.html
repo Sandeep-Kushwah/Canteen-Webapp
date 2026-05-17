@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Canteen Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- CSS Architecture -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/global.css">
@@ -27,47 +27,29 @@
                 <p>Register to start ordering delicious food</p>
             </div>
 
-            <form class="auth-form" id="register-form" data-validate>
+            <!--  -->
+            <form th:action="@{'/get-registered'}" method="post" class="auth-form" id="register-form">
+                <!--data-validate-->
                 <!-- Full Name -->
                 <div class="form-group">
                     <label class="form-label" for="fullname">Full Name</label>
                     <div class="auth-input-group">
-                        <input type="text" 
-                               class="form-input" 
-                               id="fullname" 
-                               name="fullname" 
-                               placeholder="Enter your full name"
-                               required>
+                        <input type="text" class="form-input" id="fullname" name="fullname"
+                            placeholder="Enter your full name" required>
                         <i class="fas fa-user auth-input-icon"></i>
                     </div>
                 </div>
 
-                <!-- Email -->
+                <!-- Department Number -->
                 <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="department">Department Name</label>
                     <div class="auth-input-group">
-                        <input type="email" 
-                               class="form-input" 
-                               id="email" 
-                               name="email" 
-                               placeholder="Enter your email"
-                               required>
-                        <i class="fas fa-envelope auth-input-icon"></i>
-                    </div>
-                </div>
-
-                <!-- Contact -->
-                <div class="form-group">
-                    <label class="form-label" for="contact">Contact Number</label>
-                    <div class="auth-input-group">
-                        <input type="tel" 
-                               class="form-input" 
-                               id="contact" 
-                               name="contact" 
-                               placeholder="Enter your contact number"
-                               pattern="[0-9]{10}"
-                               required>
-                        <i class="fas fa-phone auth-input-icon"></i>
+                        <select class="form-select" id="category-badge" name="department">
+                            <option value="">Select category</option>
+                            <option value="enginnering">Enginnering</option>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="management">Management</option>
+                        </select>
                     </div>
                 </div>
 
@@ -75,27 +57,31 @@
                 <div class="form-group">
                     <label class="form-label" for="enrollment">Enrollment Number</label>
                     <div class="auth-input-group">
-                        <input type="text" 
-                               class="form-input" 
-                               id="enrollment" 
-                               name="enrollment" 
-                               placeholder="Enter your enrollment number"
-                               required>
+                        <input type="text" class="form-input" id="enrollment" name="enrollment"
+                            placeholder="Enter your enrollment number" required>
                         <i class="fas fa-id-card auth-input-icon"></i>
                     </div>
                 </div>
 
-                <!-- Username -->
+
+
+                <!-- Contact -->
                 <div class="form-group">
-                    <label class="form-label" for="username">Username</label>
+                    <label class="form-label" for="contact">Contact Number</label>
                     <div class="auth-input-group">
-                        <input type="text" 
-                               class="form-input" 
-                               id="username" 
-                               name="username" 
-                               placeholder="Choose a username"
-                               required>
-                        <i class="fas fa-user-tag auth-input-icon"></i>
+                        <input type="tel" class="form-input" id="contact" name="contact"
+                            placeholder="Enter your contact number" pattern="[0-9]{10}" required>
+                        <i class="fas fa-phone auth-input-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <div class="auth-input-group">
+                        <input type="email" class="form-input" id="email" name="email" placeholder="Enter your email"
+                            required>
+                        <i class="fas fa-envelope auth-input-icon"></i>
                     </div>
                 </div>
 
@@ -103,15 +89,11 @@
                 <div class="form-group">
                     <label class="form-label" for="password">Password</label>
                     <div class="auth-input-group">
-                        <input type="password" 
-                               class="form-input" 
-                               id="password" 
-                               name="password" 
-                               placeholder="Create a password"
-                               required>
+                        <input type="password" class="form-input" id="password" name="password"
+                            placeholder="Create a password" required>
                         <i class="fas fa-eye auth-input-icon password-toggle"></i>
                     </div>
-                    
+
                     <!-- Password Strength Indicator -->
                     <div class="password-strength">
                         <div class="password-strength-bar">
@@ -142,13 +124,13 @@
                 <!-- Terms & Conditions -->
                 <div class="form-group">
                     <label class="form-checkbox">
-                        <input type="checkbox" id="terms" required>
+                        <input type="checkbox" name="termsCheckbox" id="terms" required>
                         <span>I agree to the Terms & Conditions</span>
                     </label>
                 </div>
 
                 <!-- Register Button -->
-                <button type="submit" class="auth-submit-btn" data-loading="Creating account...">
+                <button type="submit" class="auth-submit-btn"> <!--data-loading="Creating account..."-->
                     <i class="fas fa-user-plus"></i>
                     Register
                 </button>
@@ -166,7 +148,7 @@
 
                 <!-- Login Link -->
                 <div class="auth-footer">
-                    Already have an account? 
+                    Already have an account?
                     <a href="login">Login here</a>
                 </div>
             </form>
@@ -174,45 +156,7 @@
     </div>
 
     <!-- Footer Component -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <!-- Contact Section -->
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p>
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+918889414008">+91 8889414008</a>
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:collegecanteen@gmail.com">collegecanteen@gmail.com</a>
-                    </p>
-                </div>
-
-                <!-- Canteen Info -->
-                <div class="footer-section">
-                    <h3>About Canteen</h3>
-                    <p>
-                        Your favorite campus canteen serving delicious food 
-                        with love and care.
-                    </p>
-                </div>
-
-                <!-- Opening Hours -->
-                <div class="footer-section">
-                    <h3>Opening Hours</h3>
-                    <p><i class="fas fa-clock"></i> Everyday</p>
-                    <p>09:00 AM - 10:00 PM</p>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Canteen Management System. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <section th:replace="~{footer :: footer}"></section>
 
     <!-- Modular JavaScript -->
     <script src="js/utils.js"></script>
@@ -223,12 +167,17 @@
 
     <!-- Page-specific JavaScript -->
     <script>
+
+        function iClicked() {
+            console.log("Muhhh, Mujhe touch kiya");
+        }
+
         // Password strength validation
         document.addEventListener('DOMContentLoaded', () => {
             const passwordInput = document.getElementById('password');
             const strengthFill = document.getElementById('password-strength-fill');
             const strengthText = document.getElementById('password-strength-text');
-            
+
             const reqCapital = document.getElementById('req-capital');
             const reqSpecial = document.getElementById('req-special');
             const reqNumber = document.getElementById('req-number');
@@ -279,35 +228,94 @@
             }
 
             // Register form handling
-            const registerForm = document.getElementById('register-form');
-            
-            registerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const password = passwordInput.value;
-                const result = Validator.validatePassword(password);
-                
-                if (!result.isValid) {
-                    toast.error('Password does not meet requirements');
-                    return;
-                }
-                
-                // Simulate registration (replace with actual API call)
-                toast.info('Creating account...');
-                
-                setTimeout(() => {
-                    toast.success('Registration successful!');
-                    // Redirect to login page after successful registration
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 1000);
-                }, 1500);
-            });
+            // const registerForm = document.getElementById('register-form');
 
-            // Google register button (UI only - backend OAuth required)
-            const googleBtn = document.querySelector('.auth-google-btn');
-            googleBtn.addEventListener('click', () => {
-                toast.info('Google OAuth integration required for backend');
+            // registerForm.addEventListener('submit', (e) => {
+
+            //     const password = passwordInput.value;
+            //     const result = Validator.validatePassword(password);
+
+            //     if (!result.isValid) {
+            //         e.preventDefault();
+            //         toast.error('Password does not meet requirements');
+            //         return;
+            //     }
+
+            //     // Simulate registration (replace with actual API call)
+            //     toast.info('Creating account...');
+
+            //     // setTimeout(() => {
+            //     //     toast.success('Registration successful!');
+            //     //     // Redirect to login page after successful registration
+            //     //     setTimeout(() => {
+            //     //         window.location.href = 'login.html';
+            //     //     }, 1000);
+            //     // }, 1500);
+            // });
+
+            // // Google register button (UI only - backend OAuth required)
+            // const googleBtn = document.querySelector('.auth-google-btn');
+            // googleBtn.addEventListener('click', () => {
+            //     toast.info('Google OAuth integration required for backend');
+            // });
+
+            const registerForm = document.getElementById('register-form');
+
+            registerForm.addEventListener('submit', async (e) => {
+
+                e.preventDefault();
+
+                const submitBtn = registerForm.querySelector('.auth-submit-btn');
+
+                // Start loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Creating Account...`;
+
+                try {
+
+                    const formData = new FormData(registerForm);
+
+                    const response = await fetch('/get-registered', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.text();
+
+                    if (result === 'success') {
+                        toast.success('Registration successfull');
+                        submitBtn.innerHTML = `<i class="fas fa-check"></i> Success`;
+
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 2000);
+
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Register`;
+                        toast.error('Registration Failed !!!\nDue To Some Technical Issues');
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Register`;
+
+                    // alert("Server error");
+                    // toast.success('Registration successful!');
+                    setTimeout(() => {
+                        toast.error('Registration Failed !!!\nDue To Some Technical Issues');
+                        // Redirect to login page after successful registration
+                        setTimeout(() => {
+                            window.location.href = 'register';
+                        }, 1000);
+                    }, 1500);
+
+                }
+
             });
         });
     </script>

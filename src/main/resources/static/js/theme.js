@@ -4,7 +4,7 @@
 
 class ThemeManager {
     constructor() {
-        this.currentTheme = this.getStoredTheme() || this.getSystemTheme();
+        this.currentTheme = this.getStoredTheme() || 'light'; // At light there was this.getSystemTheme
         this.init();
     }
 
@@ -29,9 +29,9 @@ class ThemeManager {
      * Get system theme preference
      * @returns {string} Theme name
      */
-    getSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
+    // getSystemTheme() {
+    //     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // }
 
     /**
      * Apply theme to document

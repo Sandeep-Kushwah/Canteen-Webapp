@@ -32,7 +32,7 @@
                     <button class="btn btn-secondary">
                         <i class="fas fa-filter"></i> Filter
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" onclick="window.location.href=`home`">
                         <i class="fas fa-plus"></i> New Order
                     </button>
                 </div>
@@ -242,45 +242,7 @@
     </div>
 
     <!-- Footer Component -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <!-- Contact Section -->
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p>
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+918889414008">+91 8889414008</a>
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:collegecanteen@gmail.com">collegecanteen@gmail.com</a>
-                    </p>
-                </div>
-
-                <!-- Canteen Info -->
-                <div class="footer-section">
-                    <h3>About Canteen</h3>
-                    <p>
-                        Your favorite campus canteen serving delicious food 
-                        with love and care.
-                    </p>
-                </div>
-
-                <!-- Opening Hours -->
-                <div class="footer-section">
-                    <h3>Opening Hours</h3>
-                    <p><i class="fas fa-clock"></i> Everyday</p>
-                    <p>09:00 AM - 10:00 PM</p>
-                </div>
-            </div>
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Canteen Management System. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <section th:replace="~{footer :: footer}"></section>
 
     <!-- Modular JavaScript -->
     <script src="js/utils.js"></script>

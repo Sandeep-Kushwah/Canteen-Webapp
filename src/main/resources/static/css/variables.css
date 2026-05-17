@@ -27,7 +27,7 @@
     /* Status Colors */
     --success: #60b355cb; /*#4da325*/
     --success-light: rgba(77, 163, 37, 0.1);
-    --error: #dc2626;
+    --error: #dc2626b8;
     --error-light: rgba(220, 38, 38, 0.1);
     --warning: #f59e0b;
     --warning-light: rgba(245, 158, 11, 0.1);

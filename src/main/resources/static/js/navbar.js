@@ -102,6 +102,7 @@ class Navbar {
             let searchTimeout;
 
             this.searchInput.addEventListener('input', (e) => {
+                scrollToMenu();
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(() => {
                     this.handleSearch(e.target.value);
