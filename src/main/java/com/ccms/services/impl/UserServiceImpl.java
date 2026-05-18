@@ -1,7 +1,6 @@
 package com.ccms.services.impl;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import com.ccms.repository.UserRepo;
 import com.ccms.services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
@@ -34,18 +33,22 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean saveUser(User user) {
-        System.out.println("User object data : "+user);
+    public User saveUser(User user) {
 
-        //To generate random ID
+        // To generate random ID
         // String userId = UUID.randomUUID().toString();
         // user.setUserId(Integer.parseInt(userId));
-
-        //password encoder
+        // password encoder
         
-        System.out.println("I am in saveUser method");
-        userRepo.save(user);
-        return true;
+        try {
+            User returnUser = userRepo.save(user);
+            if (returnUser != null)
+                return returnUser;
+            else
+                return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -54,4 +57,8 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
 }

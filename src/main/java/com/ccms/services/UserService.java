@@ -8,8 +8,9 @@ import com.ccms.entities.User;
 
 @Service
 public interface UserService {
-    public boolean saveUser(User user);
+    public User saveUser(User user);
     public User getUserById(int id);
+    public User getUserByEmail(String email);
     public User updateUser(User user);
     public User deleteUser(int id);
     public List<User> getAllUsers();

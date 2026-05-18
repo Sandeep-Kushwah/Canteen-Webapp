@@ -1,13 +1,16 @@
 package com.ccms.controllers;
 
-import com.ccms.Application;
 import com.ccms.entities.User;
-import com.ccms.repository.UserRepo;
 import com.ccms.services.impl.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
+import org.hibernate.type.BindingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,16 +20,8 @@ import com.ccms.forms.UserForm;
 @Controller
 public class PageController {
 
-    private final UserRepo userRepo;
-    private final Application application;
-    
     @Autowired
     private UserServiceImpl userService;
-
-    PageController(Application application, UserRepo userRepo) {
-        this.application = application;
-        this.userRepo = userRepo;
-    }
 
     @GetMapping("/")
     public String defaultPage() {
@@ -61,7 +56,6 @@ public class PageController {
     @GetMapping("/register")
     public String registerPage(Model model) {
         UserForm user = new UserForm();
-        user.setFullname("Ravan Hu Main");
         model.addAttribute("user", user);
         return "register";
     }
@@ -76,8 +70,10 @@ public class PageController {
     @PostMapping("/get-registered")
     @ResponseBody
     public String getRegistered(@ModelAttribute UserForm userForm) {
-        // System.out.println(user);
 
+        // Validate form data
+
+        // Fetch form data
         User user = new User();
         user.setName(userForm.getFullname());
         user.setDepartment(userForm.getDepartment());
@@ -86,15 +82,17 @@ public class PageController {
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setTermsAndConditions(userForm.isTermsCheckbox());
+        user.setProfileUrl("https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png");
 
-        //Fetch form data
-        //Validate form data
-        //Save to database
-        userService.saveUser(user);
+        // If user already exists
+        if(userService.getUserByEmail(userForm.getEmail()) != null)
+            return "alreadyExist";
 
-        //message="Registration successfull"
-        //Redirect to login page
+        // Save to database
+        User reternUser = userService.saveUser(user);
+        if (reternUser != null)
+            return "success";
 
-        return "success"; // redirect:/register
+        return "";
     }
 }

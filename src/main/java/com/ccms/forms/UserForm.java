@@ -1,5 +1,9 @@
 package com.ccms.forms;
 
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +22,6 @@ public class UserForm {
     private String contact;
     private String email;
     private String password;
-    //In getter it will : isTermsCheckbox
-    private boolean termsCheckbox; 
+    // In getter it will : isTermsCheckbox
+    private boolean termsCheckbox;
 }

@@ -40,6 +40,7 @@
                     </div>
                 </div>
 
+
                 <!-- Department Number -->
                 <div class="form-group">
                     <label class="form-label" for="department">Department Name</label>
@@ -49,6 +50,7 @@
                             <option value="enginnering">Enginnering</option>
                             <option value="pharmacy">Pharmacy</option>
                             <option value="management">Management</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                 </div>
@@ -58,7 +60,7 @@
                     <label class="form-label" for="enrollment">Enrollment Number</label>
                     <div class="auth-input-group">
                         <input type="text" class="form-input" id="enrollment" name="enrollment"
-                            placeholder="Enter your enrollment number" required>
+                            placeholder="Enter your enrollment number">
                         <i class="fas fa-id-card auth-input-icon"></i>
                     </div>
                 </div>
@@ -283,17 +285,21 @@
                     const result = await response.text();
 
                     if (result === 'success') {
-                        toast.success('Registration successfull');
+                        toast.success('Registration Successfull');
                         submitBtn.innerHTML = `<i class="fas fa-check"></i> Success`;
 
                         setTimeout(() => {
                             window.location.href = '/login';
                         }, 2000);
 
+                    } else if (result == 'alreadyExist') {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Register`;
+                        toast.error('User/Email Already Exist !!!');
                     } else {
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Register`;
-                        toast.error('Registration Failed !!!\nDue To Some Technical Issues');
+                        toast.error('Registration Failed Due To Some Technical Issues');
                     }
 
                 } catch (error) {
