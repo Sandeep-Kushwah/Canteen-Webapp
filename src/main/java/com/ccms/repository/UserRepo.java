@@ -11,5 +11,5 @@ public interface UserRepo extends JpaRepository<User, Integer>{
     //Custom finder methods (This two following mehtod are custom finder methods)
     //Because we don't need to write queries for it
     User findByEmail(String email);
-    // Optional<User> findByEmailAndPassword(String email, String password);
+    User findByEmailAndPassword(String email, String password);
 }

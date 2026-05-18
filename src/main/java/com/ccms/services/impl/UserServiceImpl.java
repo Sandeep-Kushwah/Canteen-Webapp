@@ -9,6 +9,8 @@ import com.ccms.entities.User;
 import com.ccms.repository.UserRepo;
 import com.ccms.services.UserService;
 
+import lombok.val;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
         // String userId = UUID.randomUUID().toString();
         // user.setUserId(Integer.parseInt(userId));
         // password encoder
-        
+
         try {
             User returnUser = userRepo.save(user);
             if (returnUser != null)
@@ -60,5 +62,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepo.findByEmail(email);
+    }
+
+    @Override
+    public boolean isUserValid(String email, String password) {
+        try {
+            User validUser = userRepo.findByEmailAndPassword(email, password);
+            System.out.println("Loged in user details from db : "+validUser.toString());
+            if (validUser != null)
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

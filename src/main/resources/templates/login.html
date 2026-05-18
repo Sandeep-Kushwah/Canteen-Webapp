@@ -27,16 +27,16 @@
                 <p>Login to your account to continue</p>
             </div>
 
-            <form class="auth-form" id="login-form" data-validate>
+            <form action="/get-login" method="post"> <!-- data-validate id="login-form" class="auth-form"-->
                 <!-- Username -->
                 <div class="form-group">
-                    <label class="form-label" for="username">Username</label>
+                    <label class="form-label" for="email">Email</label>
                     <div class="auth-input-group">
-                        <input type="text" 
+                        <input type="email" 
                                class="form-input" 
-                               id="username" 
-                               name="username" 
-                               placeholder="Enter your username"
+                               id="email" 
+                               name="email" 
+                               placeholder="Enter your Email"
                                required>
                         <i class="fas fa-user auth-input-icon"></i>
                     </div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Login Button -->
-                <button type="submit" class="auth-submit-btn" data-loading="Logging in...">
+                <button type="submit" class="auth-submit-btn" > <!--  data-loading="Logging in..." -->
                     <i class="fas fa-sign-in-alt"></i>
                     Login
                 </button>
@@ -104,38 +104,38 @@
     <!-- Page-specific JavaScript -->
     <script>
         // Login form handling
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('login-form');
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const loginForm = document.getElementById('login-form');
             
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+        //     loginForm.addEventListener('submit', (e) => {
+        //         // e.preventDefault();
                 
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
+        //         const email = document.getElementById('email').value;
+        //         const password = document.getElementById('password').value;
                 
-                // Simulate login (replace with actual API call)
-                toast.info('Logging in...');
+        //         // Simulate login (replace with actual API call)
+        //         // toast.info('Logging in...');
                 
-                setTimeout(() => {
-                    // Demo login validation
-                    if (username && password) {
-                        toast.success('Login successful!');
-                        // Redirect to home page after successful login
-                        setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 1000);
-                    } else {
-                        toast.error('Invalid username or password');
-                    }
-                }, 1500);
-            });
+        //         setTimeout(() => {
+        //             // Demo login validation
+        //             if (email && password) {
+        //                 toast.success('Login successful!');
+        //                 // Redirect to home page after successful login
+        //                 setTimeout(() => {
+        //                     window.location.href = 'home';
+        //                 }, 1000);
+        //             } else {
+        //                 toast.error('Invalid email or password');
+        //             }
+        //         }, 1500);
+        //     });
 
             // Google login button (UI only - backend OAuth required)
-            const googleBtn = document.querySelector('.auth-google-btn');
-            googleBtn.addEventListener('click', () => {
-                toast.info('Google OAuth integration required for backend');
-            });
-        });
+        //     const googleBtn = document.querySelector('.auth-google-btn');
+        //     googleBtn.addEventListener('click', () => {
+        //         toast.info('Google OAuth integration required for backend');
+        //     });
+        // });
     </script>
 
 </body>

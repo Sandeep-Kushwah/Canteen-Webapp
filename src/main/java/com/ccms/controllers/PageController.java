@@ -2,20 +2,17 @@ package com.ccms.controllers;
 
 import com.ccms.entities.User;
 import com.ccms.services.impl.UserServiceImpl;
-
-import jakarta.validation.Valid;
-
-import org.hibernate.type.BindingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ccms.forms.LoginForm;
 import com.ccms.forms.UserForm;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class PageController {
@@ -24,8 +21,8 @@ public class PageController {
     private UserServiceImpl userService;
 
     @GetMapping("/")
-    public String defaultPage() {
-        return "index";
+    public String defaultPage(Model model) {
+        return "login";
     }
 
     @GetMapping("/home")
@@ -85,7 +82,7 @@ public class PageController {
         user.setProfileUrl("https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png");
 
         // If user already exists
-        if(userService.getUserByEmail(userForm.getEmail()) != null)
+        if (userService.getUserByEmail(userForm.getEmail()) != null)
             return "alreadyExist";
 
         // Save to database
@@ -95,4 +92,17 @@ public class PageController {
 
         return "";
     }
+
+    @PostMapping("/get-login")
+    public String postMethodName(@ModelAttribute LoginForm loginUser) {
+        boolean returnUser = userService.isUserValid(loginUser.getEmail(), loginUser.getPassword());
+        System.out.println("In get-loigin method : "+returnUser);
+        if (returnUser){
+            System.out.println("User loged in");
+            return "redirect:/index";
+        }
+        System.out.println("User does not login due to some isues");
+        return "login";
+    }
+
 }
