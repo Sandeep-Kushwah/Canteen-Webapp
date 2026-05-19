@@ -65,16 +65,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserValid(String email, String password) {
+    public User isUserValid(String email, String password) {
         try {
-            User validUser = userRepo.findByEmailAndPassword(email, password);
-            System.out.println("Loged in user details from db : "+validUser.toString());
-            if (validUser != null)
-                return true;
-            else
-                return false;
+            return userRepo.findByEmailAndPassword(email, password);
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 }

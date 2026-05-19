@@ -38,9 +38,15 @@
             </a>
 
             <!-- Login/Profile -->
-            <a id="login-register-href" href="login" class="btn btn-secondary btn-sm login-btn">
+            <a th:if="${session.user == null}" id="login-register-href" href="login"
+                class="btn btn-secondary btn-sm login-btn">
                 <i class="fas fa-user"></i>
                 <span class="login-text" id="login-register-click">Login</span>
+            </a>
+
+            <a th:unless="${session.user == null}" id="login-register-href" href="profile"
+                class="btn btn-secondary btn-sm login-btn">
+                <i class="fas fa-user"></i>
             </a>
 
             <!-- Mobile Menu Toggle -->

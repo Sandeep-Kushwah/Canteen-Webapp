@@ -2,6 +2,9 @@ package com.ccms.controllers;
 
 import com.ccms.entities.User;
 import com.ccms.services.impl.UserServiceImpl;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccms.forms.LoginForm;
 import com.ccms.forms.UserForm;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class PageController {
@@ -22,7 +24,7 @@ public class PageController {
 
     @GetMapping("/")
     public String defaultPage(Model model) {
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/home")
@@ -62,6 +64,11 @@ public class PageController {
         return "payment";
     }
 
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";
+    }
+
     // We can also use "@RequestMapping(value = "/get-registered",
     // method="RequetMethod.POST")
     @PostMapping("/get-registered")
@@ -94,15 +101,21 @@ public class PageController {
     }
 
     @PostMapping("/get-login")
-    public String postMethodName(@ModelAttribute LoginForm loginUser) {
-        boolean returnUser = userService.isUserValid(loginUser.getEmail(), loginUser.getPassword());
-        System.out.println("In get-loigin method : "+returnUser);
-        if (returnUser){
-            System.out.println("User loged in");
-            return "redirect:/index";
-        }
-        System.out.println("User does not login due to some isues");
-        return "login";
-    }
+    @ResponseBody
+    public String postMethodName(@ModelAttribute LoginForm loginUser, HttpSession session) {
+        User returnUser = userService.isUserValid(loginUser.getEmail(), loginUser.getPassword());
+        session.setAttribute("user", returnUser);
 
+        System.out.println("===========USER DETAILS");
+        System.out.println("Name : "+returnUser.getName());
+        System.out.println("Email : "+returnUser.getEmail());
+        System.out.println("Depart : "+returnUser.getDepartment());
+        System.out.println("Pro URL : "+returnUser.getProfileUrl());
+
+        if (returnUser != null){
+            System.out.println("User loged in");
+            return "success";
+        }
+        return "";
+    }
 }

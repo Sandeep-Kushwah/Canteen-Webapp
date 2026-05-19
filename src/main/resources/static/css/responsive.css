@@ -43,6 +43,15 @@
     .navbar-search {
         display: none;
     }
+
+    .profile-circle{
+        padding: 10px;
+    }
+
+    .navbar-profile {
+        height: 20px;
+        width: 20px;
+    }
     
     .navbar-mobile-menu.open {
         display: block;

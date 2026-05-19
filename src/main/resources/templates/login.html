@@ -27,7 +27,7 @@
                 <p>Login to your account to continue</p>
             </div>
 
-            <form action="/get-login" method="post"> <!-- data-validate id="login-form" class="auth-form"-->
+            <form action="/get-login" method="post" id="login-form"> <!-- data-validate class="auth-form"-->
                 <!-- Username -->
                 <div class="form-group">
                     <label class="form-label" for="email">Email</label>
@@ -136,6 +136,65 @@
         //         toast.info('Google OAuth integration required for backend');
         //     });
         // });
+
+        const loginForm = document.getElementById('login-form');
+
+            loginForm.addEventListener('submit', async (e) => {
+
+                e.preventDefault();
+
+                const submitBtn = loginForm.querySelector('.auth-submit-btn');
+
+                // Start loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Creating Account...`;
+
+                try {
+
+                    const formData = new FormData(loginForm);
+
+                    const response = await fetch('/get-login', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.text();
+
+                    if (result === 'success') {
+                        toast.success('Login Successfull');
+                        submitBtn.innerHTML = `<i class="fas fa-check"></i> Success`;
+
+                        setTimeout(() => {
+                            window.location.href = '/home';
+                        }, 2000);
+
+                    }else {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Login`;
+                        toast.error('Username/Password May Wrong !!!');
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.innerHTML = `<i class="fas fa-user-plus"></i>Login`;
+
+                    // alert("Server error");
+                    // toast.success('Registration successful!');
+                    setTimeout(() => {
+                        toast.error('Login Failed !!!\nDue To Some Technical Issues');
+                        // Redirect to login page after successful registration
+                        setTimeout(() => {
+                            window.location.href = 'login';
+                        }, 1000);
+                    }, 1500);
+
+                }
+
+            });
     </script>
 
 </body>

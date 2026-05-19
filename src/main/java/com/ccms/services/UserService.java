@@ -14,5 +14,5 @@ public interface UserService {
     public User updateUser(User user);
     public User deleteUser(int id);
     public List<User> getAllUsers();
-    public boolean isUserValid(String email, String password);
+    public User isUserValid(String email, String password);
 }

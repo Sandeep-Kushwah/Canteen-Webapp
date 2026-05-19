@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Canteen Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <section th:replace="~{navbar :: navbar}"></section>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+
+        <br><br>
+
+        <!-- Dashboard Content -->
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Profile Card -->
+                <div class="dashboard-main">
+                    <div class="section-header">
+                        <h2>Profile Information</h2>
+                        <button class="btn btn-primary btn-sm" id="edit-profile-btn">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
+
+                    <!-- Profile View Mode -->
+                    <div class="profile-view" id="profile-view">
+                        <div class="profile-header">
+                            <div class="profile-photo-container">
+                                <img th:src="@{${session.user.getProfileUrl}}" alt="Profile Photo" class="profile-photo" id="profile-photo-display">
+                                <div class="profile-photo-badge">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                            </div>
+                            <div class="profile-info">
+                                <h3 class="profile-name" id="display-name" th:text="${session.user.getName}">John Doe</h3>
+                                <p class="profile-email" id="display-email" th:text="${session.user.getEmail}">john.doe@example.com</p>
+                                <span class="badge badge-primary" th:text="${session.user.getDepartment}">Student</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <label>Enrollment Number</label>
+                                    <p id="display-enroll" th:text="${session.user.getEnrollmentNumber}">2024001</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <label>Phone Number</label>
+                                    <p id="display-phone" th:text="${session.user.getContact}">+91 </p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <label>Address</label>
+                                    <p id="display-address">College Campus, Main Building</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <label>Member Since</label>
+                                    <p id="display-joined">January 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Total Orders</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="stat-number">₹450</div>
+                                <div class="stat-label">Total Spent</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Wishlist Items</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Edit Mode -->
+                    <div class="profile-edit hidden" id="profile-edit">
+                        <form class="auth-form" id="profile-form">
+                            <div class="form-group">
+                                <label class="form-label" for="profile-photo">Profile Photo</label>
+                                <div class="profile-photo-upload">
+                                    <img src="images/default-avatar.png" alt="Profile Photo" class="profile-photo-preview" id="profile-photo-preview">
+                                    <input type="file" 
+                                           class="form-input" 
+                                           id="profile-photo" 
+                                           accept="image/*"
+                                           style="display: none;">
+                                    <button type="button" class="btn btn-secondary btn-sm" id="upload-photo-btn">
+                                        <i class="fas fa-upload"></i> Upload Photo
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="edit-name">Full Name</label>
+                                <div class="auth-input-group">
+                                    <input type="text" 
+                                           class="form-input" 
+                                           id="edit-name" 
+                                           value="John Doe"
+                                           required>
+                                    <i class="fas fa-user auth-input-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="edit-email">Email Address</label>
+                                <div class="auth-input-group">
+                                    <input type="email" 
+                                           class="form-input" 
+                                           id="edit-email" 
+                                           value="john.doe@example.com"
+                                           required>
+                                    <i class="fas fa-envelope auth-input-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="edit-enroll">Enrollment Number</label>
+                                <div class="auth-input-group">
+                                    <input type="text" 
+                                           class="form-input" 
+                                           id="edit-enroll" 
+                                           value="2024001"
+                                           required>
+                                    <i class="fas fa-id-card auth-input-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="edit-phone">Phone Number</label>
+                                <div class="auth-input-group">
+                                    <input type="tel" 
+                                           class="form-input" 
+                                           id="edit-phone" 
+                                           value="+91 98765 43210"
+                                           required>
+                                    <i class="fas fa-phone auth-input-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="edit-address">Address</label>
+                                <div class="auth-input-group">
+                                    <input type="text" 
+                                           class="form-input" 
+                                           id="edit-address" 
+                                           value="College Campus, Main Building"
+                                           required>
+                                    <i class="fas fa-map-marker-alt auth-input-icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancel-edit-btn">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Account Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-outline btn-block" id="change-password-btn">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                            <button class="btn btn-secondary btn-block" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                            <button class="btn btn-danger btn-block" id="delete-account-btn">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Quick Links</h3>
+                        <div class="quick-links">
+                            <a href="order.html" class="quick-link">
+                                <i class="fas fa-shopping-bag"></i> My Orders
+                            </a>
+                            <a href="wishlist.html" class="quick-link">
+                                <i class="fas fa-heart"></i> Wishlist
+                            </a>
+                            <a href="history.html" class="quick-link">
+                                <i class="fas fa-history"></i> Order History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <section th:replace="~{footer :: footer}"></section>
+
+    <!-- Modular JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Profile edit functionality
+            const editBtn = document.getElementById('edit-profile-btn');
+            const cancelBtn = document.getElementById('cancel-edit-btn');
+            const profileView = document.getElementById('profile-view');
+            const profileEdit = document.getElementById('profile-edit');
+            const profileForm = document.getElementById('profile-form');
+
+            // Toggle edit mode
+            editBtn.addEventListener('click', () => {
+                profileView.classList.add('hidden');
+                profileEdit.classList.remove('hidden');
+                editBtn.classList.add('hidden');
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                profileView.classList.remove('hidden');
+                profileEdit.classList.add('hidden');
+                editBtn.classList.remove('hidden');
+            });
+
+            // Profile photo upload
+            const uploadPhotoBtn = document.getElementById('upload-photo-btn');
+            const profilePhotoInput = document.getElementById('profile-photo');
+            const profilePhotoPreview = document.getElementById('profile-photo-preview');
+
+            uploadPhotoBtn.addEventListener('click', () => {
+                profilePhotoInput.click();
+            });
+
+            profilePhotoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        profilePhotoPreview.src = event.target.result;
+                        toast.info('Photo selected. Click Save Changes to update.');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save profile changes
+            profileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('edit-name').value;
+                const email = document.getElementById('edit-email').value;
+                const enroll = document.getElementById('edit-enroll').value;
+                const phone = document.getElementById('edit-phone').value;
+                const address = document.getElementById('edit-address').value;
+
+                // Update display
+                document.getElementById('display-name').textContent = name;
+                document.getElementById('display-email').textContent = email;
+                document.getElementById('display-enroll').textContent = enroll;
+                document.getElementById('display-phone').textContent = phone;
+                document.getElementById('display-address').textContent = address;
+                document.getElementById('profile-photo-display').src = profilePhotoPreview.src;
+
+                // Switch back to view mode
+                profileView.classList.remove('hidden');
+                profileEdit.classList.add('hidden');
+                editBtn.classList.remove('hidden');
+
+                toast.success('Profile updated successfully!');
+            });
+
+            // Logout functionality
+            const logoutBtn = document.getElementById('logout-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout');
+
+            const handleLogout = () => {
+                if (confirm('Are you sure you want to logout?')) {
+                    toast.info('Logging out...');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                }
+            };
+
+            logoutBtn.addEventListener('click', handleLogout);
+            mobileLogoutBtn.addEventListener('click', handleLogout);
+
+            // Delete account functionality
+            const deleteAccountBtn = document.getElementById('delete-account-btn');
+            deleteAccountBtn.addEventListener('click', () => {
+                const confirmation = prompt('To delete your account, type "DELETE" to confirm:');
+                if (confirmation === 'DELETE') {
+                    if (confirm('This action cannot be undone. Are you sure you want to permanently delete your account?')) {
+                        toast.info('Deleting account...');
+                        setTimeout(() => {
+                            toast.success('Account deleted successfully');
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1500);
+                        }, 2000);
+                    }
+                } else if (confirmation !== null) {
+                    toast.error('Invalid confirmation. Account not deleted.');
+                }
+            });
+
+            // Change password (placeholder)
+            const changePasswordBtn = document.getElementById('change-password-btn');
+            changePasswordBtn.addEventListener('click', () => {
+                toast.info('Change password feature coming soon!');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
