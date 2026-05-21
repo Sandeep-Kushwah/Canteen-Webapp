@@ -1,15 +1,12 @@
 package com.ccms.services.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ccms.entities.User;
 import com.ccms.repository.UserRepo;
 import com.ccms.services.UserService;
 
-import lombok.val;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,7 +16,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUser(int id) {
+        
         return null;
+    }
+
+    @Override
+    public User deleteUserByEmail(String email){
+        return userRepo.deleteByEmail(email);
     }
 
     @Override

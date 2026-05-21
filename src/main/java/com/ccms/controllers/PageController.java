@@ -2,9 +2,7 @@ package com.ccms.controllers;
 
 import com.ccms.entities.User;
 import com.ccms.services.impl.UserServiceImpl;
-
 import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +20,9 @@ public class PageController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    HttpSession sessionAuto;
+
     @GetMapping("/")
     public String defaultPage(Model model) {
         return "redirect:/login";
@@ -29,12 +30,13 @@ public class PageController {
 
     @GetMapping("/home")
     public String indexPage() {
-        return "index";
+
+        return isLogin("index");
     }
 
     @GetMapping("/history")
     public String historyPage() {
-        return "history";
+        return isLogin("history");
     }
 
     @GetMapping("/login")
@@ -42,14 +44,31 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logoutPage(HttpSession session) {
+        session.invalidate();
+        System.out.println("Session Invalidate in LogoutPage : "+sessionAuto);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/deleteAccount")
+    public String deleteAccount(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        System.out.println("Session in delete method is : " + session);
+        System.out.println("Session object : " + session.getAttribute("user"));
+        User check = userService.deleteUserByEmail(user.getEmail());
+        System.out.println("What by default return : " + check);
+        return "redirect:/login";
+    }
+
     @GetMapping("/order")
     public String orderPage() {
-        return "order";
+        return isLogin("order");
     }
 
     @GetMapping("/wishlist")
     public String wishlistPage() {
-        return "wishlist";
+        return isLogin("wishlist");
     }
 
     @GetMapping("/register")
@@ -104,18 +123,39 @@ public class PageController {
     @ResponseBody
     public String postMethodName(@ModelAttribute LoginForm loginUser, HttpSession session) {
         User returnUser = userService.isUserValid(loginUser.getEmail(), loginUser.getPassword());
+
         session.setAttribute("user", returnUser);
 
         System.out.println("===========USER DETAILS");
-        System.out.println("Name : "+returnUser.getName());
-        System.out.println("Email : "+returnUser.getEmail());
-        System.out.println("Depart : "+returnUser.getDepartment());
-        System.out.println("Pro URL : "+returnUser.getProfileUrl());
+        System.out.println("Name : " + returnUser.getName());
+        System.out.println("Email : " + returnUser.getEmail());
+        System.out.println("Depart : " + returnUser.getDepartment());
+        System.out.println("Pro URL : " + returnUser.getProfileUrl());
 
-        if (returnUser != null){
+        if (returnUser != null) {
             System.out.println("User loged in");
             return "success";
         }
         return "";
     }
+
+    public String isLogin(String route) {
+        
+        System.out.println("Is Login method : " + sessionAuto.getAttribute("user"));
+        if (sessionAuto.getAttribute("user") == null)
+            return "redirect:/login";
+        return route;
+    }
+
+    // The core utility helper to grab the session anywhere
+    // private HttpSession getCurrentSession() {
+    //     ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+    //     if (attributes != null) {
+    //         HttpServletRequest request = attributes.getRequest();
+    //         // passing 'false' means: return the existing session, don't create a new one if
+    //         // it doesn't exist
+    //         return request.getSession(false);
+    //     }
+    //     return null;
+    // }
 }

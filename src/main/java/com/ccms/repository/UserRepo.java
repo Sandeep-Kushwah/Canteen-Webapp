@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.ccms.entities.User;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer>{
     //We can also write some essential methods.
@@ -12,4 +14,7 @@ public interface UserRepo extends JpaRepository<User, Integer>{
     //Because we don't need to write queries for it
     User findByEmail(String email);
     User findByEmailAndPassword(String email, String password);
+    // public Optional<User> findByUsername(String username); 
+    @Transactional
+    User deleteByEmail(String email);
 }

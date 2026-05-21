@@ -25,6 +25,7 @@ if (currentPage.includes("login")) {
 }
 //Above code to toggle the login and register button.
 
+
 class Navbar {
     constructor() {
         this.navbar = null;
@@ -79,12 +80,29 @@ class Navbar {
      */
     setupActiveLink() {
         const currentPage = window.location.pathname.split('/').pop();
+        console.log("Current page user : " + currentPage);
         const links = document.querySelectorAll('.navbar-link, .navbar-mobile-link');
 
         links.forEach(link => {
             const href = link.getAttribute('href');
             if (href === currentPage ||
                 (currentPage === '' && href === 'home')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    setupActiveLink() {
+        const adminCurrentPage = window.location.pathname.split('/').pop();
+        console.log("Current page admin : " + adminCurrentPage);
+        const links = document.querySelectorAll('.navbar-link, .navbar-mobile-link');
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === adminCurrentPage ||
+                (adminCurrentPage === '' && href === 'home')) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
