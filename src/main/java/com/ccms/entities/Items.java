@@ -1,11 +1,8 @@
 package com.ccms.entities;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.ccms.enums.Badge;
 import com.ccms.enums.Category;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

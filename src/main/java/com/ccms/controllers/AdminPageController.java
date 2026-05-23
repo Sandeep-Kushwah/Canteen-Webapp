@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.ccms.forms.ItemsForm;
 
+import com.ccms.entities.Items;
+import com.ccms.forms.ItemsForm;
+import com.ccms.services.impl.AdminServiceImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,11 +22,14 @@ public class AdminPageController {
     @Autowired
     private addItemController addItemController;
 
+    @Autowired
+    private AdminServiceImpl adminService;
+
     @GetMapping("/")
     public String getLoginPage() {
         return "admin/login";
     }
-    
+
     @GetMapping("/add")
     public String getAddPage(Model model) {
         ItemsForm itemsForm = new ItemsForm();
@@ -35,12 +41,13 @@ public class AdminPageController {
     public String getAdminPage() {
         return "admin/admin";
     }
-    
+
     @GetMapping("/edit")
-    public String getEditPage() {
+    public String getEditPage(Model model) {
+        model.addAttribute("allItems", adminService.getAllItems());
         return "admin/edit";
     }
-    
+
     @GetMapping("/history")
     public String getHistroyPage() {
         return "admin/history";
@@ -57,10 +64,24 @@ public class AdminPageController {
     }
 
     @PostMapping("/uploadItem")
+    @ResponseBody
     public String getItemDetails(@RequestParam("imageFile") MultipartFile file, @ModelAttribute ItemsForm itemsForm) {
-        String url = addItemController.uploadImageAndGetUrl(file, itemsForm);
-        
-        return "redirect:/admin/add";
+        String imageUrl = addItemController.uploadImageAndGetUrl(file, itemsForm);
+
+        System.out.println("AA gya hu");
+
+        Items items = new Items();
+        items.setItemName(itemsForm.getItemName());
+        items.setCategory(itemsForm.getCategory());
+        items.setBadge(itemsForm.getBadge());
+        items.setPrice(itemsForm.getPrice());
+        items.setDiscription(itemsForm.getDiscription());
+        items.setImageFile(imageUrl);
+
+        if (adminService.addItem(items))
+            return "success";
+
+        return "";
     }
-    
+
 }

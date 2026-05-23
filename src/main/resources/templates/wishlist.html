@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist - Canteen Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- CSS Architecture -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 
@@ -21,8 +22,8 @@
 
     <!-- Wishlist Section -->
     <div class="container" style="padding-top: var(--spacing-3xl);">
-        <!-- Section Header -->
-        <div class="section-header">
+        <!-- Section Header  -->
+        <div class="dashboard-header section-header">
             <div>
                 <h1>My Wishlist</h1>
                 <p>Save your favorite items for later</p>
@@ -50,7 +51,8 @@
             <!-- Product 1: Burger -->
             <div class="product-card" data-category="burger" data-id="1" data-price="20" data-name="Burger">
                 <div class="product-image">
-                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-craig-122861-376464.jpg&fm=jpg" alt="Burger">
+                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-craig-122861-376464.jpg&fm=jpg"
+                        alt="Burger">
                     <span class="product-badge">Popular</span>
                     <button class="product-wishlist wishlist-btn active" data-id="1" data-price="20" data-name="Burger">
                         <i class="fas fa-heart"></i>
@@ -74,7 +76,8 @@
             <!-- Product 2: Soup -->
             <div class="product-card" data-category="food" data-id="2" data-price="80" data-name="Soop">
                 <div class="product-image">
-                    <img src="https://plus.unsplash.com/premium_photo-1694547926001-f2151e4a476b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fHww" alt="Soup">
+                    <img src="https://plus.unsplash.com/premium_photo-1694547926001-f2151e4a476b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fHww"
+                        alt="Soup">
                     <button class="product-wishlist wishlist-btn active" data-id="2" data-price="80" data-name="Soop">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -97,9 +100,11 @@
             <!-- Product 3: Premium Burger -->
             <div class="product-card" data-category="burger" data-id="3" data-price="100" data-name="Burger">
                 <div class="product-image">
-                    <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Ch=1335%2Cq=85%2Cw=2000/wp-content/uploads/national-fast-food-day.jpg" alt="Premium Burger">
+                    <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Ch=1335%2Cq=85%2Cw=2000/wp-content/uploads/national-fast-food-day.jpg"
+                        alt="Premium Burger">
                     <span class="product-badge">Premium</span>
-                    <button class="product-wishlist wishlist-btn active" data-id="3" data-price="100" data-name="Burger">
+                    <button class="product-wishlist wishlist-btn active" data-id="3" data-price="100"
+                        data-name="Burger">
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
@@ -121,8 +126,10 @@
             <!-- Product 4: Chocolate -->
             <div class="product-card" data-category="chocolate" data-id="4" data-price="120" data-name="Chocolate">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Chocolate">
-                    <button class="product-wishlist wishlist-btn active" data-id="4" data-price="120" data-name="Chocolate">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Chocolate">
+                    <button class="product-wishlist wishlist-btn active" data-id="4" data-price="120"
+                        data-name="Chocolate">
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
@@ -144,7 +151,8 @@
             <!-- Product 5: Food -->
             <div class="product-card" data-category="food" data-id="5" data-price="60" data-name="Food">
                 <div class="product-image">
-                    <img src="https://img.freepik.com/free-photo/assortment-indian-dishes-platter_23-2152002848.jpg?semt=ais_hybrid&w=740&q=80" alt="Food">
+                    <img src="https://img.freepik.com/free-photo/assortment-indian-dishes-platter_23-2152002848.jpg?semt=ais_hybrid&w=740&q=80"
+                        alt="Food">
                     <span class="product-badge">Bestseller</span>
                     <button class="product-wishlist wishlist-btn active" data-id="5" data-price="60" data-name="Food">
                         <i class="fas fa-heart"></i>
@@ -168,8 +176,10 @@
             <!-- Product 6: Chocolate 2 -->
             <div class="product-card" data-category="chocolate" data-id="6" data-price="120" data-name="Chocolate2">
                 <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Chocolate">
-                    <button class="product-wishlist wishlist-btn active" data-id="6" data-price="120" data-name="Chocolate2">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Chocolate">
+                    <button class="product-wishlist wishlist-btn active" data-id="6" data-price="120"
+                        data-name="Chocolate2">
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
@@ -241,11 +251,11 @@
             const searchInput = document.getElementById('wishlist-search');
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
-                
+
                 productCards.forEach(card => {
                     const name = card.querySelector('.product-name').textContent.toLowerCase();
                     const category = card.querySelector('.product-category').textContent.toLowerCase();
-                    
+
                     if (name.includes(query) || category.includes(query)) {
                         card.style.display = 'block';
                     } else {
@@ -260,12 +270,12 @@
                     e.stopPropagation();
                     const card = btn.closest('.product-card');
                     const id = parseInt(card.dataset.id);
-                    
+
                     if (confirm('Remove this item from wishlist?')) {
                         wishlist.removeItem(id);
                         card.remove();
                         toast.success('Item removed from wishlist');
-                        
+
                         // Check if wishlist is empty
                         if (wishlistGrid.children.length === 0) {
                             wishlistGrid.classList.add('hidden');
@@ -283,7 +293,7 @@
                     const id = parseInt(card.dataset.id);
                     const price = parseFloat(card.dataset.price);
                     const name = card.dataset.name;
-                    
+
                     cart.addItem(id, price, name, 1);
                     toast.success('Item added to cart');
                 });

@@ -24,34 +24,46 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Builder // To convert an object into user like (UserFormo --> User) but it can't set default values
+@Builder // To convert an object into user like (UserFormo --> User) but it can't set
+         // default values
 public class User {
     // Basic information of user
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
+    
     @Column(nullable = false)
     private String name;
+    
     private String department;
+    
     private String enrollmentNumber;
+    
     private String contact;
+    
     @Column(unique = true, nullable = false)
     private String email;
+    
     @Column(nullable = false)
     private String password;
+    
     private String profileUrl;
+    
+    @Builder.Default
     private boolean termsAndConditions = false;
 
     // Verification status
+    @Builder.Default
     private boolean emailVerified = false;
 
     // Band status of user
+    @Builder.Default
     private boolean band = false;
 
     // Provider name (How user logedIn/Registered)
+    @Builder.Default
     @Enumerated(value = EnumType.STRING)
     private Providers provider = Providers.SELF;
-    private String providerUserId;
 
-    // Add more fields if needed
+    private String providerUserId;
 }

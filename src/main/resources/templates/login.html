@@ -56,31 +56,11 @@
                     </div>
                 </div>
 
-                <!-- Remember Me & Forgot Password -->
-                <div class="flex-between mb-2">
-                    <label class="form-checkbox">
-                        <input type="checkbox" id="remember">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#" class="text-sm">Forgot password?</a>
-                </div>
-
                 <!-- Login Button -->
                 <button type="submit" class="auth-submit-btn" > <!--  data-loading="Logging in..." -->
                     <i class="fas fa-sign-in-alt"></i>
                     Login
                 </button>
-
-                <!-- Divider -->
-                <div class="auth-divider">or continue with</div>
-
-                <!-- Social Login -->
-                <div class="auth-social-login">
-                    <button type="button" class="auth-google-btn">
-                        <img src="https://www.google.com/favicon.ico" alt="Google">
-                        Sign in with Google
-                    </button>
-                </div>
 
                 <!-- Register Link -->
                 <div class="auth-footer">
@@ -103,40 +83,7 @@
 
     <!-- Page-specific JavaScript -->
     <script>
-        // Login form handling
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     const loginForm = document.getElementById('login-form');
-            
-        //     loginForm.addEventListener('submit', (e) => {
-        //         // e.preventDefault();
-                
-        //         const email = document.getElementById('email').value;
-        //         const password = document.getElementById('password').value;
-                
-        //         // Simulate login (replace with actual API call)
-        //         // toast.info('Logging in...');
-                
-        //         setTimeout(() => {
-        //             // Demo login validation
-        //             if (email && password) {
-        //                 toast.success('Login successful!');
-        //                 // Redirect to home page after successful login
-        //                 setTimeout(() => {
-        //                     window.location.href = 'home';
-        //                 }, 1000);
-        //             } else {
-        //                 toast.error('Invalid email or password');
-        //             }
-        //         }, 1500);
-        //     });
-
-            // Google login button (UI only - backend OAuth required)
-        //     const googleBtn = document.querySelector('.auth-google-btn');
-        //     googleBtn.addEventListener('click', () => {
-        //         toast.info('Google OAuth integration required for backend');
-        //     });
-        // });
-
+       
         const loginForm = document.getElementById('login-form');
 
             loginForm.addEventListener('submit', async (e) => {

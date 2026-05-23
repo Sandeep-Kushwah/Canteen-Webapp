@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders - Canteen Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- CSS Architecture -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/global.css">
@@ -29,9 +29,6 @@
                     <p>Track and manage your food orders</p>
                 </div>
                 <div class="dashboard-actions">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-filter"></i> Filter
-                    </button>
                     <button class="btn btn-primary" onclick="window.location.href=`home`">
                         <i class="fas fa-plus"></i> New Order
                     </button>
@@ -49,10 +46,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Orders</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 12% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.numberOfOrders}">---</div>
                     </div>
                 </div>
 
@@ -62,10 +56,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Completed</div>
-                        <div class="stat-value">2</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 8% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.totalCompleted}">---</div>
                     </div>
                 </div>
 
@@ -75,10 +66,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Pending</div>
-                        <div class="stat-value">1</div>
-                        <div class="stat-change">
-                            <i class="fas fa-minus"></i> No change
-                        </div>
+                        <div class="stat-value" th:text="${session.totalPending}">---</div>
                     </div>
                 </div>
 
@@ -88,10 +76,8 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Spent</div>
-                        <div class="stat-value">₹70</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 15% this month
-                        </div>
+                        <span class="stat-value">₹<span th:text="${session.totalSpent}"></span></span>
+                        <!-- <div class="stat-value" th:text="${totalSpent}">---</div> -->
                     </div>
                 </div>
             </div>
@@ -100,142 +86,94 @@
             <div class="dashboard-main">
                 <div class="section-header">
                     <h2>Recent Orders</h2>
-                    <div class="section-header-actions">
-                        <select class="form-select" style="width: auto;">
-                            <option value="all">All Orders</option>
-                            <option value="pending">Pending</option>
-                            <option value="completed">Completed</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="orders-list">
-                    <!-- Order 1 - Completed -->
-                    <div class="card order-card" data-status="completed">
-                        <div class="order-card-header">
-                            <div class="order-info">
-                                <h3 class="order-title">Indian Thali</h3>
-                                <p class="order-id">Order #ORD-001</p>
-                            </div>
-                            <span class="order-status completed">
-                                <i class="fas fa-check-circle"></i> Completed
-                            </span>
-                        </div>
-                        <div class="order-card-body">
-                            <div class="order-image">
-                                <img src="https://img.freepik.com/free-photo/assortment-indian-dishes-platter_23-2152002848.jpg?semt=ais_hybrid&w=740&q=80" alt="Food">
-                            </div>
-                            <div class="order-details">
-                                <div class="order-price">₹20</div>
-                                <div class="order-date">
-                                    <i class="fas fa-calendar"></i> Sep 30, 2025
-                                </div>
-                                <div class="order-quantity">Quantity: 1</div>
-                            </div>
-                            <div class="order-progress">
-                                <div class="progress">
-                                    <div class="progress-bar success" style="width: 100%;"></div>
-                                </div>
-                                <div class="progress-labels">
-                                    <span class="progress-label active">Confirmed</span>
-                                    <span class="progress-label active">Delivered</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-card-footer">
-                            <button class="btn btn-secondary btn-sm">
-                                <i class="fas fa-redo"></i> Reorder
-                            </button>
-                            <button class="btn btn-outline btn-sm">
-                                <i class="fas fa-eye"></i> View Details
-                            </button>
-                        </div>
-                    </div>
 
-                    <!-- Order 2 - Completed -->
-                    <div class="card order-card" data-status="completed">
-                        <div class="order-card-header">
-                            <div class="order-info">
-                                <h3 class="order-title">Premium Burger</h3>
-                                <p class="order-id">Order #ORD-002</p>
-                            </div>
-                            <span class="order-status completed">
-                                <i class="fas fa-check-circle"></i> Completed
-                            </span>
-                        </div>
-                        <div class="order-card-body">
-                            <div class="order-image">
-                                <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Ch=1335%2Cq=85%2Cw=2000/wp-content/uploads/national-fast-food-day.jpg" alt="Burger">
-                            </div>
-                            <div class="order-details">
-                                <div class="order-price">₹40</div>
-                                <div class="order-date">
-                                    <i class="fas fa-calendar"></i> Sep 30, 2025
-                                </div>
-                                <div class="order-quantity">Quantity: 1</div>
-                            </div>
-                            <div class="order-progress">
-                                <div class="progress">
-                                    <div class="progress-bar success" style="width: 100%;"></div>
-                                </div>
-                                <div class="progress-labels">
-                                    <span class="progress-label active">Confirmed</span>
-                                    <span class="progress-label active">Delivered</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-card-footer">
-                            <button class="btn btn-secondary btn-sm">
-                                <i class="fas fa-redo"></i> Reorder
-                            </button>
-                            <button class="btn btn-outline btn-sm">
-                                <i class="fas fa-eye"></i> View Details
-                            </button>
-                        </div>
-                    </div>
+                    <!-- <h1>I am order page</h1> -->
 
-                    <!-- Order 3 - Pending -->
-                    <div class="card order-card" data-status="pending">
-                        <div class="order-card-header">
-                            <div class="order-info">
-                                <h3 class="order-title">Delicious Chocolate</h3>
-                                <p class="order-id">Order #ORD-003</p>
-                            </div>
-                            <span class="order-status pending">
-                                <i class="fas fa-clock"></i> Pending
-                            </span>
-                        </div>
-                        <div class="order-card-body">
-                            <div class="order-image">
-                                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D" alt="Chocolate">
-                            </div>
-                            <div class="order-details">
-                                <div class="order-price">₹10</div>
-                                <div class="order-date">
-                                    <i class="fas fa-calendar"></i> Sep 30, 2025
+                    <th:block th:each="order : ${orders}">
+
+                        <!-- Order 1 - Completed -->
+                        <div class="card order-card product-card" 
+                            th:if="${order != null and order.isHide == false}"
+                            th:data-name="${order.item.itemName}" 
+                            th:data-category="${order.item.category}"
+                            th:data-status="${order.orderStatus}">
+                            <div class="order-card-header">
+                                <div class="order-info">
+                                    <h3 class="order-title" th:text="${order.item.itemName}">---</h3>
                                 </div>
-                                <div class="order-quantity">Quantity: 1</div>
+                                <span class="order-status completed"
+                                    th:if="${order.orderStatus.toString() == 'COMPLETED'}">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span th:text="${order.orderStatus}"></span>
+                                </span>
+                                <span class="order-status pending" th:if="${order.orderStatus.toString() == 'PENDING'}">
+                                    <i class="fas fa-clock"></i>
+                                    <span th:text="${order.orderStatus}"></span>
+                                </span>
+                                <span class="order-status cancelled"
+                                    th:if="${order.orderStatus.toString() == 'CANCELED'}">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span th:text="${order.orderStatus}"></span>
+                                </span>
                             </div>
-                            <div class="order-progress">
-                                <div class="progress">
-                                    <div class="progress-bar warning" style="width: 50%;"></div>
+                            <div class="order-card-body">
+                                <div class="order-image">
+                                    <img th:src="${order.item.imageFile}" alt="Food">
                                 </div>
-                                <div class="progress-labels">
-                                    <span class="progress-label active">Confirmed</span>
-                                    <span class="progress-label">Delivered</span>
+                                <div class="order-details">
+                                    <span class="order-price">₹<span th:text="${order.item.price}"></span></span>
+                                    <span class="order-date"><i class="fas fa-calendar"></i> : <span
+                                            th:text="${#temporals.format(order.orderTime, 'dd MMM yyyy hh:mm a')}"></span></span>
+                                    <span class="order-quantity">Quantity : <span
+                                            th:text="${order.quantity}"></span></span>
                                 </div>
+                                <div class="order-progress" th:if="${order.orderStatus.toString() == 'COMPLETED'}">
+                                    <div class="progress">
+                                        <div class="progress-bar success" style="width: 100%;"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span class="progress-label active">Confirmed - </span>
+                                        <span class="progress-label active">- Delivered</span>
+                                    </div>
+                                </div>
+                                <div class="order-progress" th:if="${order.orderStatus.toString() == 'PENDING'}">
+                                    <div class="progress">
+                                        <div class="progress-bar warning" style="width: 50%;"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span class="progress-label active">Confirmed - </span>
+                                        <span class="progress-label">- Delivered</span>
+                                    </div>
+                                </div>
+                                <div class="order-progress" th:if="${order.orderStatus.toString() == 'CANCELED'}">
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%;"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span class="progress-label">Confirmed - </span>
+                                        <span class="progress-label">- Delivered</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-card-footer"
+                                th:if="${order.orderStatus.toString() == 'COMPLETED' or order.orderStatus.toString() == 'CANCELED'}">
+                                <button class="btn btn-danger btn-sm" th:onclick="'hideMe(' + ${order.orderId} + ')'">
+                                    <i class="fas fa-times"></i>Hide
+                                </button>
                             </div>
                         </div>
-                        <div class="order-card-footer">
-                            <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-times"></i> Cancel Order
-                            </button>
-                            <button class="btn btn-outline btn-sm">
-                                <i class="fas fa-eye"></i> View Details
-                            </button>
+                    </th:block>
+
+                        <!-- Empty State (hidden by default) -->
+                        <div class="empty-state" id="empty-history" th:if="${session.noOrders}">
+                            <i class="fas fa-inbox fa-3x"></i>
+                            <h3>No Orders</h3>
+                            <a href="home" class="btn btn-primary">Browse Menu</a>
                         </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -255,65 +193,31 @@
 
     <!-- Page-specific JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Order search functionality
-            const searchInput = document.getElementById('order-search');
-            const orderCards = document.querySelectorAll('.order-card');
+        // console.log("JS is loading");
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     // Order search functionality
+        //     const searchInput = document.getElementById('navbar-search');
 
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                
-                orderCards.forEach(card => {
-                    const title = card.querySelector('.order-title').textContent.toLowerCase();
-                    const orderId = card.querySelector('.order-id').textContent.toLowerCase();
-                    
-                    if (title.includes(query) || orderId.includes(query)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
+        //     searchInput.addEventListener('input', (e) => {
+        //         const query = e.target.value.toLowerCase();
 
-            // Filter functionality
-            const filterSelect = document.querySelector('.form-select');
-            filterSelect.addEventListener('change', (e) => {
-                const filter = e.target.value;
-                
-                orderCards.forEach(card => {
-                    const status = card.dataset.status;
-                    
-                    if (filter === 'all' || status === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
+        //         orderCards.forEach(card => {
+        //             const title = card.querySelector('.order-title').textContent.toLowerCase();
+        //             const orderId = card.querySelector('.order-id').textContent.toLowerCase();
 
-            // Cancel order button
-            document.querySelectorAll('.order-card-footer .btn-danger').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (confirm('Are you sure you want to cancel this order?')) {
-                        toast.success('Order cancelled successfully');
-                        // Remove the card (in production, call API)
-                        btn.closest('.order-card').remove();
-                    }
-                });
-            });
+        //             if (title.includes(query) || orderId.includes(query)) {
+        //                 card.style.display = 'block';
+        //             } else {
+        //                 card.style.display = 'none';
+        //             }
+        //         });
+        //     });
+        // });
 
-            // Reorder button
-            document.querySelectorAll('.order-card-footer .btn-secondary').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    toast.info('Adding items to cart...');
-                    // In production, add items to cart from order
-                    setTimeout(() => {
-                        toast.success('Items added to cart');
-                        window.location.href = 'index.html';
-                    }, 1000);
-                });
-            });
-        });
+        // Hide order button
+        function hideMe(id) {
+            window.location.href = 'hide?id=' + id;
+        }
     </script>
 
 </body>

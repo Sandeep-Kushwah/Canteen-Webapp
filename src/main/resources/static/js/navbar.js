@@ -121,11 +121,40 @@ class Navbar {
 
             this.searchInput.addEventListener('input', (e) => {
                 scrollToMenu();
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    this.handleSearch(e.target.value);
-                }, 300);
+
+                const searchValue =
+                    this.searchInput.value.toLowerCase();
+
+                const products =
+                    document.querySelectorAll(".product-card");
+
+                products.forEach(product => {
+
+                    const productName =
+                        product.dataset.name.toLowerCase();
+
+                    const productCategory =
+                        product.dataset.category.toLowerCase();
+
+                    if (
+                        productName.includes(searchValue) ||
+                        productCategory.includes(searchValue)
+                    ) {
+
+                        product.style.display = "";
+
+                    } else {
+
+                        product.style.display = "none";
+
+                    }
+                });
             });
+
+            // clearTimeout(searchTimeout);
+            // searchTimeout = setTimeout(() => {
+            //     this.handleSearch(e.target.value);
+            // }, 300);
 
             this.searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
@@ -222,4 +251,16 @@ if (document.readyState === 'loading') {
     });
 } else {
     new Navbar();
+}
+
+function scrollToMenu() {
+
+    const menuSection = document.getElementById('menu-section');
+
+    if (menuSection) {
+
+        menuSection.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
 }

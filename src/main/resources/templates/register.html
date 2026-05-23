@@ -137,17 +137,6 @@
                     Register
                 </button>
 
-                <!-- Divider -->
-                <div class="auth-divider">or continue with</div>
-
-                <!-- Social Login -->
-                <div class="auth-social-login">
-                    <button type="button" class="auth-google-btn">
-                        <img src="https://www.google.com/favicon.ico" alt="Google">
-                        Sign up with Google
-                    </button>
-                </div>
-
                 <!-- Login Link -->
                 <div class="auth-footer">
                     Already have an account?
@@ -169,10 +158,6 @@
 
     <!-- Page-specific JavaScript -->
     <script>
-
-        function iClicked() {
-            console.log("Muhhh, Mujhe touch kiya");
-        }
 
         // Password strength validation
         document.addEventListener('DOMContentLoaded', () => {
@@ -228,38 +213,6 @@
                     element.querySelector('i').className = 'fas fa-circle';
                 }
             }
-
-            // Register form handling
-            // const registerForm = document.getElementById('register-form');
-
-            // registerForm.addEventListener('submit', (e) => {
-
-            //     const password = passwordInput.value;
-            //     const result = Validator.validatePassword(password);
-
-            //     if (!result.isValid) {
-            //         e.preventDefault();
-            //         toast.error('Password does not meet requirements');
-            //         return;
-            //     }
-
-            //     // Simulate registration (replace with actual API call)
-            //     toast.info('Creating account...');
-
-            //     // setTimeout(() => {
-            //     //     toast.success('Registration successful!');
-            //     //     // Redirect to login page after successful registration
-            //     //     setTimeout(() => {
-            //     //         window.location.href = 'login.html';
-            //     //     }, 1000);
-            //     // }, 1500);
-            // });
-
-            // // Google register button (UI only - backend OAuth required)
-            // const googleBtn = document.querySelector('.auth-google-btn');
-            // googleBtn.addEventListener('click', () => {
-            //     toast.info('Google OAuth integration required for backend');
-            // });
 
             const registerForm = document.getElementById('register-form');
 

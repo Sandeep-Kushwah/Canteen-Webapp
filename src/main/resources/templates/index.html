@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset=" UTF-8">
@@ -84,209 +84,53 @@
         <div class="category-filter">
             <div class="category-filter-container">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="burger">Burger</button>
-                <button class="filter-btn" data-filter="food">Food</button>
-                <button class="filter-btn" data-filter="juice">Juice</button>
-                <button class="filter-btn" data-filter="chocolate">Chocolate</button>
+                <button class="filter-btn" data-filter="BURGER">Burger</button>
+                <button class="filter-btn" data-filter="FOOD">Food</button>
+                <button class="filter-btn" data-filter="JUICE">Juice</button>
+                <button class="filter-btn" data-filter="CHOCOLATE">Chocolate</button>
             </div>
         </div>
 
         <!-- Product Grid -->
         <div class="product-grid" id="product-grid">
-            <!-- Product 1: Burger -->
-            <div class="product-card" data-category="burger" data-id="1" data-price="20" data-name="Burger">
-                <div class="product-image">
-                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?cs=srgb&dl=pexels-ash-craig-122861-376464.jpg&fm=jpg"
-                        alt="Burger">
-                    <span class="product-badge">Popular</span>
-                    <button class="product-wishlist wishlist-btn" data-id="1" data-price="20" data-name="Burger">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Burger</p>
-                    <h3 class="product-name">Classic Burger</h3>
-                    <p class="product-description">Delicious burger with fresh vegetables and special</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹20</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn" data-id="1" data-price="20" data-name="Burger">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="1" data-price="20" data-name="Burger">
-                                Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Product 2: Soup -->
-            <div class="product-card" data-category="food" data-id="2" data-price="80" data-name="Soop">
-                <div class="product-image">
-                    <img src="https://plus.unsplash.com/premium_photo-1694547926001-f2151e4a476b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fDB8fHww"
-                        alt="Soup">
-                    <button class="product-wishlist wishlist-btn" data-id="2" data-price="80" data-name="Soop">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Food</p>
-                    <h3 class="product-name">Special Soup</h3>
-                    <p class="product-description">Hot and delicious soup with fresh ingredients</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹80</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn" data-id="2" data-price="80" data-name="Soop">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="2" data-price="80" data-name="Soop">
-                                Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Product 3: Premium Burger -->
-            <div class="product-card" data-category="burger" data-id="3" data-price="100" data-name="Burger">
-                <div class="product-image">
-                    <img src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Ch=1335%2Cq=85%2Cw=2000/wp-content/uploads/national-fast-food-day.jpg"
-                        alt="Premium Burger">
-                    <span class="product-badge">Premium</span>
-                    <button class="product-wishlist wishlist-btn" data-id="3" data-price="100" data-name="Burger">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Burger</p>
-                    <h3 class="product-name">Premium Burger</h3>
-                    <p class="product-description">Double patty burger with cheese and special</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹100</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn" data-id="3" data-price="100" data-name="Burger">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="3" data-price="100" data-name="Burger">
-                                Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <th:block th:each="item : ${allItems}">
 
-            <!-- Product 4: Chocolate -->
-            <div class="product-card" data-category="chocolate" data-id="4" data-price="120" data-name="Chocolate">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D"
-                        alt="Chocolate">
-                    <button class="product-wishlist wishlist-btn" data-id="4" data-price="120" data-name="Chocolate">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Chocolate</p>
-                    <h3 class="product-name">Delicious Chocolate</h3>
-                    <p class="product-description">Premium chocolate with rich cocoa flavor</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹120</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
+                <!-- Product -->
+                <div class="product-card" th:data-category="${item.category}" th:data-id="${item.itemId}"
+                    th:data-price="${item.price}" th:data-name="${item.itemName}">
+                    <div class="product-image">
+                        <img th:src="${item.imageFile}" th:alt="${item.category}">
+                        <span class="product-badge" th:text="${item.badge}">---</span>
+                        <button class="product-wishlist wishlist-btn" th:data-id="${item.itemId}"
+                            th:data-price="${item.price}" th:data-name="${item.itemName}">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-body">
+                        <p class="product-category" th:text="${item.category}">---</p>
+                        <h3 class="product-name" th:text="${item.itemName}">---</h3>
+                        <p class="product-description" th:text="${item.discription}">---</p>
+                        <div class="product-footer">
+                            <span class="product-price">₹<span class="product-price"
+                                    th:text="${item.price}">---</span></span>
+                            <div class="product-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn decrease-btn">-</button>
+                                    <span class="quantity-display">1</span>
+                                    <button class="quantity-btn increase-btn">+</button>
+                                </div>
+                                <button class="buy-now-btn" th:data-id="${item.itemId}" th:data-price="${item.price}"
+                                    th:data-name="${item.itemName}">
+                                    Buy
+                                </button>
                             </div>
-                            <button class="add-to-cart-btn" data-id="4" data-price="120" data-name="Chocolate">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="4" data-price="120" data-name="Chocolate">
-                                Buy
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product 5: Food -->
-            <div class="product-card" data-category="food" data-id="5" data-price="60" data-name="Food">
-                <div class="product-image">
-                    <img src="https://img.freepik.com/free-photo/assortment-indian-dishes-platter_23-2152002848.jpg?semt=ais_hybrid&w=740&q=80"
-                        alt="Food">
-                    <span class="product-badge">Bestseller</span>
-                    <button class="product-wishlist wishlist-btn" data-id="5" data-price="60" data-name="Food">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Food</p>
-                    <h3 class="product-name">Indian Thali</h3>
-                    <p class="product-description">Complete meal with variety of dishes</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹60</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn" data-id="5" data-price="60" data-name="Food">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="5" data-price="60" data-name="Food">
-                                Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 6: Chocolate 2 -->
-            <div class="product-card" data-category="chocolate" data-id="6" data-price="120" data-name="Chocolate2">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D"
-                        alt="Chocolate">
-                    <button class="product-wishlist wishlist-btn" data-id="6" data-price="120" data-name="Chocolate2">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </div>
-                <div class="product-body">
-                    <p class="product-category">Chocolate</p>
-                    <h3 class="product-name">Dark Chocolate</h3>
-                    <p class="product-description">Rich dark chocolate with 70% cocoa</p>
-                    <div class="product-footer">
-                        <span class="product-price">₹120</span>
-                        <div class="product-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease-btn">-</button>
-                                <span class="quantity-display">1</span>
-                                <button class="quantity-btn increase-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn" data-id="6" data-price="120" data-name="Chocolate2">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
-                            <button class="buy-now-btn" data-id="6" data-price="120" data-name="Chocolate2">
-                                <i class="fas fa-bolt"></i> Buy
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
         </div>
     </section>
 
@@ -305,98 +149,156 @@
 
     <!-- Page-specific JavaScript -->
     <script>
-        // Smooth scroll to menu
-        function scrollToMenu() {
-            const menuSection = document.getElementById('menu-section');
-            if (menuSection) {
-                menuSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
 
-        // Category filter functionality
         document.addEventListener('DOMContentLoaded', () => {
+
+            // =========================
+            // CATEGORY FILTER
+            // =========================
+
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const productCards = document.querySelectorAll('.product-card');
+
+            const productCards =
+                document.querySelectorAll('.product-card');
 
             filterBtns.forEach(btn => {
+
                 btn.addEventListener('click', () => {
-                    // Update active button
-                    filterBtns.forEach(b => b.classList.remove('active'));
+
+                    filterBtns.forEach(b =>
+                        b.classList.remove('active')
+                    );
+
                     btn.classList.add('active');
 
-                    // Filter products
                     const filter = btn.dataset.filter;
+
                     productCards.forEach(card => {
-                        if (filter === 'all' || card.dataset.category === filter) {
+
+                        if (
+                            filter === 'all' ||
+                            card.dataset.category === filter
+                        ) {
+
                             card.style.display = 'block';
-                            card.classList.add('animate-fadeIn');
+
                         } else {
+
                             card.style.display = 'none';
                         }
                     });
                 });
             });
 
-            // Quantity controls
-            document.querySelectorAll('.product-card').forEach(card => {
-                const decreaseBtn = card.querySelector('.decrease-btn');
-                const increaseBtn = card.querySelector('.increase-btn');
-                const quantityDisplay = card.querySelector('.quantity-display');
+
+            // =========================
+            // PRODUCT CARD FEATURES
+            // =========================
+
+            productCards.forEach(card => {
+
+                const decreaseBtn =
+                    card.querySelector('.decrease-btn');
+
+                const increaseBtn =
+                    card.querySelector('.increase-btn');
+
+                const quantityDisplay =
+                    card.querySelector('.quantity-display');
+
+                const buyNowBtn =
+                    card.querySelector('.buy-now-btn');
+
+                const wishlistBtn =
+                    card.querySelector('.wishlist-btn');
+
                 let quantity = 1;
 
+
+                // =========================
+                // DECREASE
+                // =========================
+
                 decreaseBtn.addEventListener('click', () => {
+
                     if (quantity > 1) {
+
                         quantity--;
+
                         quantityDisplay.textContent = quantity;
                     }
                 });
+
+
+                // =========================
+                // INCREASE
+                // =========================
 
                 increaseBtn.addEventListener('click', () => {
+
                     if (quantity < 5) {
+
                         quantity++;
+
                         quantityDisplay.textContent = quantity;
                     }
                 });
 
-                // Buy Now button
-                const buyNowBtn = card.querySelector('.buy-now-btn');
-                if (buyNowBtn) {
-                    buyNowBtn.addEventListener('click', () => {
-                        const id = buyNowBtn.dataset.id;
-                        const price = buyNowBtn.dataset.price;
-                        const name = buyNowBtn.dataset.name;
-                        const qty = quantityDisplay.textContent;
 
-                        // Redirect to payment page with item details
-                        window.location.href = `payment?item=${encodeURIComponent(name)}&price=${price}&quantity=${qty}`;
-                    });
-                }
+                // =========================
+                // BUY NOW
+                // =========================
 
-                // Add to cart
-                const addBtn = card.querySelector('.add-to-cart-btn');
-                addBtn.addEventListener('click', () => {
-                    const id = parseInt(card.dataset.id);
-                    const price = parseFloat(card.dataset.price);
-                    const name = card.dataset.name;
+                buyNowBtn.addEventListener('click', () => {
 
-                    cart.addItem(id, price, name, quantity);
-                    quantity = 1;
-                    quantityDisplay.textContent = quantity;
+                    const id =
+                        buyNowBtn.dataset.id;
+
+                    const price =
+                        buyNowBtn.dataset.price;
+
+                    const name =
+                        buyNowBtn.dataset.name;
+
+                    const qty =
+                        quantityDisplay.textContent;
+
+                    console.log("ID : ", id);
+
+                    window.location.href =
+                        `payment?item=${encodeURIComponent(name)}&id=${id}&price=${price}&quantity=${qty}`;
                 });
 
-                // Wishlist toggle
-                const wishlistBtn = card.querySelector('.wishlist-btn');
+
+                // =========================
+                // WISHLIST
+                // =========================
+
                 wishlistBtn.addEventListener('click', () => {
-                    const id = parseInt(card.dataset.id);
-                    const price = parseFloat(card.dataset.price);
-                    const name = card.dataset.name;
 
-                    const event = new CustomEvent('wishlist-toggle', {
-                        detail: { id, price, name }
-                    });
-                    document.dispatchEvent(event);
+                    const id =
+                        wishlistBtn.dataset.id;
+
+                    const price =
+                        wishlistBtn.dataset.price;
+
+                    const name =
+                        wishlistBtn.dataset.name;
+
+                    console.log("Wishlist:", id);
+
+                    wishlistBtn.classList.toggle('active');
+
+                    const icon =
+                        wishlistBtn.querySelector('i');
+
+                    icon.classList.toggle('fa-regular');
+
+                    icon.classList.toggle('fa-solid');
                 });
+
             });
+
         });
     </script>
 

@@ -1,8 +1,16 @@
 package com.ccms.controllers;
 
+import com.ccms.entities.Items;
+import com.ccms.entities.Orders;
 import com.ccms.entities.User;
+import com.ccms.services.OrderService;
+import com.ccms.services.impl.AdminServiceImpl;
 import com.ccms.services.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ccms.forms.LoginForm;
 import com.ccms.forms.UserForm;
+import com.ccms.helper.OrderDetails;
+
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageController {
@@ -21,7 +33,16 @@ public class PageController {
     private UserServiceImpl userService;
 
     @Autowired
+    private AdminServiceImpl adminService;
+
+    @Autowired
     HttpSession sessionAuto;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    OrderDetails orderDetails;
 
     @GetMapping("/")
     public String defaultPage(Model model) {
@@ -29,13 +50,27 @@ public class PageController {
     }
 
     @GetMapping("/home")
-    public String indexPage() {
+    public String indexPage(Model model) {
+
+        model.addAttribute("allItems", adminService.getAllItems());
 
         return isLogin("index");
     }
 
     @GetMapping("/history")
-    public String historyPage() {
+    public String historyPage(Model model, @SessionAttribute(value = "user", required = false) User user) {
+
+        if(user == null)
+            return "redirect:/login";
+
+        List<Orders> orders = orderDetails.getOrderDetails(sessionAuto, user);
+        model.addAttribute("order", orders);
+
+        for (Orders orders2 : orders) {
+            System.out.println("Item name : "+orders2.getItem().getItemName());
+            System.out.println("Item price : "+orders2.getItem().getPrice());
+        }
+
         return isLogin("history");
     }
 
@@ -47,7 +82,7 @@ public class PageController {
     @GetMapping("/logout")
     public String logoutPage(HttpSession session) {
         session.invalidate();
-        System.out.println("Session Invalidate in LogoutPage : "+sessionAuto);
+        System.out.println("Session Invalidate in LogoutPage : " + sessionAuto);
         return "redirect:/login";
     }
 
@@ -62,8 +97,23 @@ public class PageController {
     }
 
     @GetMapping("/order")
-    public String orderPage() {
-        return isLogin("order");
+    public String orderPage(Model model, @SessionAttribute(value = "user", required = false) User user) {
+
+        if (user == null)
+            return "redirect:/login";
+
+        List<Orders> orders = orderDetails.getOrderDetails(sessionAuto, user);
+
+        model.addAttribute("orders", orders);
+        return "order";
+    }
+
+    @GetMapping("/hide")
+    public String hideMeMethod(@RequestParam int id) {
+
+        orderService.setHideMe(id);
+
+        return "redirect:/order";
     }
 
     @GetMapping("/wishlist")
@@ -86,6 +136,30 @@ public class PageController {
     @GetMapping("/profile")
     public String profilePage() {
         return "profile";
+    }
+
+    @PostMapping("/placeOrder")
+    @ResponseBody
+    public String getMethodName(
+            @RequestParam int id,
+            @RequestParam int price,
+            @RequestParam int quantity,
+            @RequestParam int total,
+            @SessionAttribute User user) throws Exception {
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        Optional<Items> item = adminService.getItemById(id);
+
+        Orders order = new Orders();
+        order.setUser(user);
+        order.setItem(item.get());
+        order.setOrderTime(currentTime);
+        order.setQuantity(quantity);
+        order.setTotalPrice(total);
+
+        if (orderService.placeOrder(order))
+            return "success";
+        return "";
     }
 
     // We can also use "@RequestMapping(value = "/get-registered",
@@ -133,14 +207,13 @@ public class PageController {
         System.out.println("Pro URL : " + returnUser.getProfileUrl());
 
         if (returnUser != null) {
-            System.out.println("User loged in");
             return "success";
         }
         return "";
     }
 
     public String isLogin(String route) {
-        
+
         System.out.println("Is Login method : " + sessionAuto.getAttribute("user"));
         if (sessionAuto.getAttribute("user") == null)
             return "redirect:/login";
@@ -149,13 +222,15 @@ public class PageController {
 
     // The core utility helper to grab the session anywhere
     // private HttpSession getCurrentSession() {
-    //     ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-    //     if (attributes != null) {
-    //         HttpServletRequest request = attributes.getRequest();
-    //         // passing 'false' means: return the existing session, don't create a new one if
-    //         // it doesn't exist
-    //         return request.getSession(false);
-    //     }
-    //     return null;
+    // ServletRequestAttributes attributes = (ServletRequestAttributes)
+    // RequestContextHolder.getRequestAttributes();
+    // if (attributes != null) {
+    // HttpServletRequest request = attributes.getRequest();
+    // // passing 'false' means: return the existing session, don't create a new one
+    // if
+    // // it doesn't exist
+    // return request.getSession(false);
+    // }
+    // return null;
     // }
 }

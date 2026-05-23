@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History - Canteen Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- CSS Architecture -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/global.css">
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    
+
     <!-- Navbar Component -->
     <section th:replace="~{navbar :: navbar}"></section>
 
@@ -28,14 +28,6 @@
                 <div class="dashboard-title">
                     <h1>Order History</h1>
                     <p>View your past orders and their status</p>
-                </div>
-                <div class="dashboard-actions">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-download"></i> Export
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-filter"></i> Filter
-                    </button>
                 </div>
             </div>
         </div>
@@ -50,10 +42,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Orders</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 12% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.numberOfOrders}">---</div>
                     </div>
                 </div>
 
@@ -63,10 +52,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Completed</div>
-                        <div class="stat-value">2</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 8% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.totalCompleted}">---</div>
                     </div>
                 </div>
 
@@ -76,10 +62,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Failed</div>
-                        <div class="stat-value">1</div>
-                        <div class="stat-change negative">
-                            <i class="fas fa-arrow-down"></i> 5% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.cancelledOrder}">---</div>
                     </div>
                 </div>
 
@@ -89,10 +72,8 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Spent</div>
-                        <div class="stat-value">₹180</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 15% this month
-                        </div>
+                        <span class="stat-value">₹<span th:text="${session.totalSpent}">---</span></span>
+                        <!-- <div class="stat-value">₹180</div> -->
                     </div>
                 </div>
             </div>
@@ -101,48 +82,50 @@
             <div class="dashboard-main">
                 <div class="section-header">
                     <h2>Order History</h2>
-                    <div class="section-header-actions">
-                        <select class="form-select" style="width: auto;">
-                            <option value="all">All Status</option>
-                            <option value="completed">Completed</option>
-                            <option value="failed">Failed</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="table-container">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
+                                <!-- <th>Order ID</th> -->
                                 <th>Item Name</th>
                                 <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-status="completed">
-                                <td>#ORD-001</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
-                                        <span>Indian Thali</span>
-                                    </div>
-                                </td>
-                                <td>₹60</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status completed">
-                                        <i class="fas fa-check-circle"></i> Completed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr>
-                            <tr data-status="failed">
+                            <th:block th:each="order : ${order}">
+                                <tr data-status="completed">
+                                    <td>
+                                        <div class="flex" style="gap: var(--spacing-sm);">
+                                            <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
+                                            <span th:text="${order.item.itemName}">---</span>
+                                        </div>
+                                    </td>
+                                    <td><span>₹<span th:text="${order.item.price}">---</span></span></td>
+                                    <td th:text="${order.quantity}">---</td>
+                                    <td><span>₹<span th:text="${order.item.price * order.quantity}">---</span></span></td>
+                                    <td  th:text="${#temporals.format(order.orderTime, 'dd MMM yyyy hh:mm a')}">Oct 05, 2025</td>
+                                    <td>
+                                        <span class="order-status completed" th:if="${order.orderStatus.toString() == 'COMPLETED'}">
+                                            <i class="fas fa-check-circle"></i> <span th:text="${order.orderStatus}">---</span>
+                                        </span>
+                                        <span class="order-status pending" th:if="${order.orderStatus.toString() == 'PENDING'}">
+                                            <i class="fas fa-clock"></i> <span th:text="${order.orderStatus}">---</span>
+                                        </span>
+                                        <span class="order-status cancelled" th:if="${order.orderStatus.toString() == 'CANCELED'}">
+                                            <i class="fas fa-cancel"></i> <span th:text="${order.orderStatus}">---</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </th:block>
+
+                            <!-- <tr data-status="failed">
                                 <td>#ORD-002</td>
                                 <td>
                                     <div class="flex-center" style="gap: var(--spacing-sm);">
@@ -179,7 +162,7 @@
                                 <td>
                                     <button class="btn btn-sm btn-outline">View</button>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -216,10 +199,10 @@
 
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
-                
+
                 tableRows.forEach(row => {
                     const text = row.textContent.toLowerCase();
-                    
+
                     if (text.includes(query)) {
                         row.style.display = '';
                     } else {
@@ -232,10 +215,10 @@
             const filterSelect = document.querySelector('.form-select');
             filterSelect.addEventListener('change', (e) => {
                 const filter = e.target.value;
-                
+
                 tableRows.forEach(row => {
                     const status = row.dataset.status;
-                    
+
                     if (filter === 'all' || status === filter) {
                         row.style.display = '';
                     } else {

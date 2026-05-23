@@ -21,104 +21,109 @@
 
     <!-- Dashboard -->
 
-        <!-- Dashboard Content -->
-        <div class="container">
-            <div class="dashboard-main">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Item Details</h2>
-                    </div>
-                    <div class="card-body">
-                        <form action="uploadItem" method="post" enctype="multipart/form-data" class="form" id="add-item-form">
-                            <!-- Item Name -->
-                            <div class="form-group">
-                                <label class="form-label" for="item-name"><i class="fas fa-utensils form-input-icon"></i> Item Name</label>
-                                <div class="form-input-group">
-                                    <input type="text" class="form-input" id="item-name" name="itemName"
-                                        placeholder="Enter item name" required>
-                                </div>
+    <!-- Dashboard Content -->
+    <div class="container">
+        <div class="dashboard-main">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Item Details</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{'/admin/uploadItem'}" method="post" enctype="multipart/form-data" class="form"
+                        id="add-item-form">
+                        <!-- Item Name -->
+                        <div class="form-group">
+                            <label class="form-label" for="item-name"><i class="fas fa-utensils form-input-icon"></i>
+                                Item Name</label>
+                            <div class="form-input-group">
+                                <input type="text" class="form-input" id="item-name" name="itemName"
+                                    placeholder="Enter item name" required>
                             </div>
+                        </div>
 
-                            <!-- Category -->
-                            <div class="form-group">
-                                <label class="form-label" for="category"><i class="fas fa-tag form-input-icon"></i> Category</label>
-                                <div class="form-input-group">
-                                    <select class="form-select" id="category" name="category" required>
-                                        <option value="">Select category</option>
-                                        <option value="BURGER">Burger</option>
-                                        <option value="FOOD">Food</option>
-                                        <option value="JUICE">Juice</option>
-                                        <option value="CHOCOLATE">Chocolate</option>
-                                        <option value="SNACKS">Snacks</option>
-                                    </select>
-                                </div>
+                        <!-- Category -->
+                        <div class="form-group">
+                            <label class="form-label" for="category"><i class="fas fa-tag form-input-icon"></i>
+                                Category</label>
+                            <div class="form-input-group">
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select category</option>
+                                    <option value="BURGER">Burger</option>
+                                    <option value="FOOD">Food</option>
+                                    <option value="JUICE">Juice</option>
+                                    <option value="CHOCOLATE">Chocolate</option>
+                                    <option value="SNACKS">Snacks</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <!-- Category Badge like Popular, Bestseller, Premium -->
-                            <div class="form-group">
-                                <label class="form-label" for="category"><i class="fas fa-tag form-input-icon"></i> Badge</label>
-                                <div class="form-input-group">
-                                    <select class="form-select" id="category-badge" name="badge" required>
-                                        <option value="">Select category</option>
-                                        <option value="POPULAR">Popular</option>
-                                        <option value="BESTSELLER">Bestseller</option>
-                                        <option value="PREMIUM">Premium</option>
-                                    </select>
-                                </div>
+                        <!-- Category Badge like Popular, Bestseller, Premium -->
+                        <div class="form-group">
+                            <label class="form-label" for="category"><i class="fas fa-tag form-input-icon"></i>
+                                Badge</label>
+                            <div class="form-input-group">
+                                <select class="form-select" id="category-badge" name="badge" required>
+                                    <option value="">Select category</option>
+                                    <option value="POPULAR">Popular</option>
+                                    <option value="BESTSELLER">Bestseller</option>
+                                    <option value="PREMIUM">Premium</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <!-- Price -->
-                            <div class="form-group">
-                                <label class="form-label" for="price"><i class="fas fa-rupee-sign form-input-icon"></i> Price (₹)</label>
-                                <div class="form-input-group">
-                                    <input type="number" class="form-input" id="price" name="price"
-                                        placeholder="Enter price" min="0" step="0.01" required>
-                                </div>
+                        <!-- Price -->
+                        <div class="form-group">
+                            <label class="form-label" for="price"><i class="fas fa-rupee-sign form-input-icon"></i>
+                                Price (₹)</label>
+                            <div class="form-input-group">
+                                <input type="number" class="form-input" id="price" name="price"
+                                    placeholder="Enter price" min="0" step="0.01" required>
                             </div>
+                        </div>
 
-                            <!-- Description -->
-                            <div class="form-group">
-                                <label class="form-label" for="description">Description</label>
-                                <textarea class="form-input" id="description" name="description" rows="3"
-                                    placeholder="Enter item description" maxlength="55"
-                                    oninput="countChars(this)"></textarea>
-                                <p>You can enter only <span id="char-count">0</span> / 55 characters.</p>
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-input" id="description" name="discription" rows="3"
+                                placeholder="Enter item description" maxlength="55"
+                                oninput="countChars(this)"></textarea>
+                            <p>You can enter only <span id="char-count">0</span> / 55 characters.</p>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-group">
+                            <label class="form-label" for="image">Item Image</label>
+                            <div class="file-upload">
+                                <label for="image" class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Choose file or drag and drop</span>
+                                    <span class="file-upload-text">PNG, JPG up to 5MB</span>
+                                </label>
+                                <input type="file" id="image" name="imageFile" accept="image/*"
+                                    class="file-upload-input">
                             </div>
-
-                            <!-- Image Upload -->
-                            <div class="form-group">
-                                <label class="form-label" for="image">Item Image</label>
-                                <div class="file-upload">
-                                    <label for="image" class="file-upload-label">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                        <span>Choose file or drag and drop</span>
-                                        <span class="file-upload-text">PNG, JPG up to 5MB</span>
-                                    </label>
-                                    <input type="file" id="image" name="imageFile" accept="image/*"
-                                        class="file-upload-input">
-                                </div>
-                                <div class="image-preview hidden" id="image-preview">
-                                    <img src="" alt="Preview" id="preview-img">
-                                    <button type="button" class="btn btn-sm btn-danger remove-image">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="form-actions">
-                                <button type="button" class="btn btn-secondary">
-                                    <i class="fas fa-times"></i> Cancel
-                                </button>
-                                <button type="submit" class="btn btn-primary"> <!--data-loading="Adding item..."-->
-                                    <i class="fas fa-plus"></i> Add Item
+                            <div class="image-preview hidden" id="image-preview">
+                                <img src="" alt="Preview" id="preview-img">
+                                <button type="button" class="btn btn-sm btn-danger remove-image">
+                                    <i class="fas fa-times"></i>
                                 </button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary"> <!--data-loading="Adding item..."-->
+                                <i class="fas fa-plus"></i> Add Item
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Modular JavaScript -->
@@ -135,61 +140,75 @@
             document.getElementById("char-count").innerHTML = obj.value.length;
         }
 
-            document.addEventListener('DOMContentLoaded', () => {
-                const form = document.getElementById('add-item-form');
-                const imageInput = document.getElementById('image');
-                const imagePreview = document.getElementById('image-preview');
-                const previewImg = document.getElementById('preview-img');
-                const removeImageBtn = document.querySelector('.remove-image');
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('add-item-form');
+            const imageInput = document.getElementById('image');
+            const imagePreview = document.getElementById('image-preview');
+            const previewImg = document.getElementById('preview-img');
+            const removeImageBtn = document.querySelector('.remove-image');
 
-                // Image preview
-                imageInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            previewImg.src = e.target.result;
-                            imagePreview.classList.remove('hidden');
-                        };
-                        reader.readAsDataURL(file);
-                    }
+            // Image preview
+            imageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImg.src = e.target.result;
+                        imagePreview.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Remove image
+            removeImageBtn.addEventListener('click', () => {
+                imageInput.value = '';
+                previewImg.src = '';
+                imagePreview.classList.add('hidden');
+            });
+
+            // Form submission
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const itemName = document.getElementById('item-name').value;
+                const category = document.getElementById('category').value;
+                const price = document.getElementById('price').value;
+                const description = document.getElementById('description').value;
+                const image = imageInput.files[0];
+
+                if (!itemName || !category || !price) {
+                    toast.error('Please fill in all required fields');
+                    return;
+                }
+
+                // Simulate adding item (replace with actual API call)
+                toast.info('Adding item...');
+
+                const formData = new FormData(form);
+
+                const response = await fetch('/admin/uploadItem', {
+                    method: 'POST',
+                    body: formData
                 });
 
-                // Remove image
-                removeImageBtn.addEventListener('click', () => {
-                    imageInput.value = '';
-                    previewImg.src = '';
-                    imagePreview.classList.add('hidden');
-                });
+                const result = await response.text();
+                console.log("Not waited ");
 
-                // Form submission
-                form.addEventListener('submit', (e) => {
-                    // e.preventDefault();
-
-                    const itemName = document.getElementById('item-name').value;
-                    const category = document.getElementById('category').value;
-                    const price = document.getElementById('price').value;
-                    const description = document.getElementById('description').value;
-                    const image = imageInput.files[0];
-
-                    if (!itemName || !category || !price) {
-                        toast.error('Please fill in all required fields');
-                        return;
-                    }
-
-                    // Simulate adding item (replace with actual API call)
-                    toast.info('Adding item...');
-
-                    // window.location.href='/item';
-
+                if (result == 'success') {
                     setTimeout(() => {
                         toast.success('Item added successfully');
                         form.reset();
                         imagePreview.classList.add('hidden');
                         // Redirect to edit page or stay on add page
                     }, 1500);
-                });
+                } else{
+                    setTimeout(() => {
+                        toast.error('Item not added due to some issue');
+                    }, 1500);
+                }
             });
+        });
     </script>
 
 </body>
