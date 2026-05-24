@@ -4,8 +4,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ccms.entities.Orders;
+import com.ccms.enums.OrderStatus;
 import com.ccms.repository.OrderRepo;
 import com.ccms.services.OrderService;
+
+import jakarta.persistence.criteria.Order;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -53,6 +56,29 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             System.out.println("Exception in setHideMe Method");
             return null;
+        }
+    }
+
+    @Override
+    public List<Orders> getAllOrders() {
+        try {
+            return orderRepo.findAll();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean setOrderStatus(int id, OrderStatus orderStatus) {
+        try {
+            Orders order = getOrderByOrderId(id);
+            order.setOrderStatus(orderStatus);
+            if (orderRepo.save(order) != null)
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 

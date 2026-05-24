@@ -103,8 +103,10 @@
                                 <tr data-status="completed">
                                     <td>
                                         <div class="flex" style="gap: var(--spacing-sm);">
-                                            <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
-                                            <span th:text="${order.item.itemName}">---</span>
+                                            <div class="adminItemsImg">
+                                                <img th:src="${order.item.imageFile}" alt="img">
+                                            </div>
+                                            <span class="adminItemName" th:text="${order.item.itemName}">---</span>
                                         </div>
                                     </td>
                                     <td><span>₹<span th:text="${order.item.price}">---</span></span></td>
@@ -124,45 +126,6 @@
                                     </td>
                                 </tr>
                             </th:block>
-
-                            <!-- <tr data-status="failed">
-                                <td>#ORD-002</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-hamburger" style="color: var(--primary-color);"></i>
-                                        <span>Burger</span>
-                                    </div>
-                                </td>
-                                <td>₹60</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status cancelled">
-                                        <i class="fas fa-times-circle"></i> Failed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr>
-                            <tr data-status="completed">
-                                <td>#ORD-003</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-pizza-slice" style="color: var(--primary-color);"></i>
-                                        <span>Pizza</span>
-                                    </div>
-                                </td>
-                                <td>₹60</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status completed">
-                                        <i class="fas fa-check-circle"></i> Completed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>

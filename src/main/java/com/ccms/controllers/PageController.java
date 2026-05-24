@@ -82,7 +82,6 @@ public class PageController {
     @GetMapping("/logout")
     public String logoutPage(HttpSession session) {
         session.invalidate();
-        System.out.println("Session Invalidate in LogoutPage : " + sessionAuto);
         return "redirect:/login";
     }
 

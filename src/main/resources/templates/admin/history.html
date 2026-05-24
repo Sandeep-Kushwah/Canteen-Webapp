@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History - Canteen Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- CSS Architecture -->
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css">
@@ -29,11 +29,8 @@
                     <p>View all completed orders and customer activity</p>
                 </div>
                 <div class="dashboard-actions">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-download"></i> Export
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-filter"></i> Filter
+                    <button class="btn btn-primary" onclick="location.reload()">
+                        <i class="fas fa-sync"></i> Refresh
                     </button>
                 </div>
             </div>
@@ -49,10 +46,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Orders</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 12% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.adminTotalOrders}">---</div>
                     </div>
                 </div>
 
@@ -62,10 +56,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Completed</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 8% this month
-                        </div>
+                        <div class="stat-value" th:text="${session.adminTotalCompletedOrders}">---</div>
                     </div>
                 </div>
 
@@ -75,23 +66,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="stat-label">Total Revenue</div>
-                        <div class="stat-value">₹160</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 15% this month
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon warning">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-label">Unique Customers</div>
-                        <div class="stat-value">3</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> 10% this month
-                        </div>
+                        <div class="stat-value">₹<span th:text="${session.totalRevenue}"></span></div>
                     </div>
                 </div>
             </div>
@@ -100,85 +75,51 @@
             <div class="dashboard-main">
                 <div class="section-header">
                     <h2>Order History</h2>
-                    <div class="section-header-actions">
-                        <select class="form-select" style="width: auto;">
-                            <option value="all">All Status</option>
-                            <option value="completed">Completed</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="table-container">
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>CustomerItem Name</th>
                                 <th>Customer</th>
-                                <th>Item Name</th>
-                                <th>Price</th>
+                                <th>Amount(Total)</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-status="completed">
-                                <td>Rahul</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
-                                        <span>Food</span>
-                                    </div>
-                                </td>
-                                <td>₹60</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status completed">
-                                        <i class="fas fa-check-circle"></i> Completed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr>
-                            <tr data-status="completed">
-                                <td>Krishna</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-hamburger" style="color: var(--primary-color);"></i>
-                                        <span>Burger</span>
-                                    </div>
-                                </td>
-                                <td>₹80</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status completed">
-                                        <i class="fas fa-check-circle"></i> Completed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr>
-                            <tr data-status="completed">
-                                <td>Radha</td>
-                                <td>
-                                    <div class="flex-center" style="gap: var(--spacing-sm);">
-                                        <i class="fas fa-cookie-bite" style="color: var(--primary-color);"></i>
-                                        <span>Momos</span>
-                                    </div>
-                                </td>
-                                <td>₹20</td>
-                                <td>Oct 05, 2025</td>
-                                <td>
-                                    <span class="order-status completed">
-                                        <i class="fas fa-check-circle"></i> Completed
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline">View</button>
-                                </td>
-                            </tr>
+                            <th:block th:if="${orders != null}" th:each="orders : ${orders}">
+                                <tr th:data-status="${orders.orderStatus}">
+                                    <td>
+                                        <div class="adminItemsImg">
+                                            <img th:src="${orders.item.imageFile}" alt="img">
+                                        </div>
+                                        <span th:text="${orders.item.itemName}">ItemName</span>
+                                    </td>
+                                    <td>
+                                        <div class="flex" style="gap: var(--spacing-sm);">
+                                            <span th:text="${orders.user.name}">Name</span>
+                                        </div>
+                                    </td>
+                                    <td>₹<span th:text="${orders.item.price * orders.quantity}"></span></td>
+                                    <td th:text="${#temporals.format(orders.orderTime, 'dd/MM/yyyy hh:mm a')}">Date </td>
+                                    <td>
+                                        <span class="order-status completed"
+                                            th:if="${orders.orderStatus.toString() == 'COMPLETED'}">
+                                            <i class="fas fa-check-circle"></i> Completed
+                                        </span>
+                                        <span class="order-status pending"
+                                            th:if="${orders.orderStatus.toString() == 'PENDING'}">
+                                            <i class="fas fa-clock"></i> Pending
+                                        </span>
+                                        <span class="order-status cancelled"
+                                            th:if="${orders.orderStatus.toString() == 'CANCELED'}">
+                                            <i class="fas fa-cancel"></i> Cancelled
+                                        </span>
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
                 </div>
@@ -209,38 +150,15 @@
 
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
-                
+
                 tableRows.forEach(row => {
                     const text = row.textContent.toLowerCase();
-                    
+
                     if (text.includes(query)) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';
                     }
-                });
-            });
-
-            // Filter functionality
-            const filterSelect = document.querySelector('.form-select');
-            filterSelect.addEventListener('change', (e) => {
-                const filter = e.target.value;
-                
-                tableRows.forEach(row => {
-                    const status = row.dataset.status;
-                    
-                    if (filter === 'all' || status === filter) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-
-            // View button functionality
-            document.querySelectorAll('.table .btn-outline').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    toast.info('Order details modal would open here');
                 });
             });
         });

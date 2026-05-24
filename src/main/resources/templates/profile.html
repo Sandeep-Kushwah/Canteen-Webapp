@@ -31,9 +31,9 @@
                 <div class="dashboard-main">
                     <div class="section-header">
                         <h2>Profile Information</h2>
-                        <button class="btn btn-primary btn-sm" id="edit-profile-btn">
+                        <!-- <button class="btn btn-primary btn-sm" id="edit-profile-btn">
                             <i class="fas fa-edit"></i> Edit Profile
-                        </button>
+                        </button> -->
                     </div>
 
                     <!-- Profile View Mode -->
@@ -94,219 +94,118 @@
                             </div>
                         </div>
 
-                        <!-- Quick Stats -->
-                        <div class="profile-stats">
-                            <div class="profile-stat">
-                                <div class="stat-number">12</div>
-                                <div class="stat-label">Total Orders</div>
-                            </div>
-                            <div class="profile-stat">
-                                <div class="stat-number">₹450</div>
-                                <div class="stat-label">Total Spent</div>
-                            </div>
-                            <div class="profile-stat">
-                                <div class="stat-number">5</div>
-                                <div class="stat-label">Wishlist Items</div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Profile Edit Mode -->
-                    <div class="profile-edit hidden" id="profile-edit">
-                        <form class="auth-form" id="profile-form">
-                            <div class="form-group">
-                                <label class="form-label" for="profile-photo">Profile Photo</label>
-                                <div class="profile-photo-upload">
-                                    <img th:src="@{${session.user.getProfileUrl}}" alt="Profile Photo"
-                                        class="profile-photo-preview" id="profile-photo-preview">
-                                    <input type="file" class="form-input" id="profile-photo" accept="image/*"
-                                        style="display: none;">
-                                    <button type="button" class="btn btn-secondary btn-sm" id="upload-photo-btn">
-                                        <i class="fas fa-upload"></i> Upload Photo
+                        <!-- Profile Edit Mode -->
+                        <div class="profile-edit hidden" id="profile-edit">
+                            <form class="auth-form" id="profile-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="profile-photo">Profile Photo</label>
+                                    <div class="profile-photo-upload">
+                                        <img th:src="@{${session.user.getProfileUrl}}" alt="Profile Photo"
+                                            class="profile-photo-preview" id="profile-photo-preview">
+                                        <input type="file" class="form-input" id="profile-photo" accept="image/*"
+                                            style="display: none;">
+                                        <button type="button" class="btn btn-secondary btn-sm" id="upload-photo-btn">
+                                            <i class="fas fa-upload"></i> Upload Photo
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-name"><i
+                                            class="fas fa-user auth-input-icon"></i>
+                                        Full Name</label>
+                                    <div class="auth-input-group">
+                                        <input type="text" class="form-input" id="edit-name"
+                                            th:value="${session.user.getName}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-email"><i
+                                            class="fas fa-envelope auth-input-icon"></i> Email Address</label>
+                                    <div class="auth-input-group">
+                                        <input type="email" class="form-input" id="edit-email"
+                                            th:value="${session.user.getEmail}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-enroll"><i
+                                            class="fas fa-id-card auth-input-icon"></i> Enrollment Number</label>
+                                    <div class="auth-input-group">
+                                        <input type="text" class="form-input" id="edit-enroll"
+                                            th:value="${session.user.getEnrollmentNumber}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-phone"><i class="fas fa-phone auth-input-icon">
+                                        </i>
+                                        Phone Number</label>
+                                    <div class="auth-input-group">
+                                        <input type="tel" class="form-input" id="edit-phone"
+                                            th:value="${session.user.getContact}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-address"><i class="fas fa-building"></i>
+                                        Department</label>
+                                    <div class="auth-input-group">
+                                        <input type="text" class="form-input" id="edit-address"
+                                            th:value="${session.user.getDepartment}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" id="cancel-edit-btn">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Save Changes
                                     </button>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="edit-name"><i class="fas fa-user auth-input-icon"></i>
-                                    Full Name</label>
-                                <div class="auth-input-group">
-                                    <input type="text" class="form-input" id="edit-name"
-                                        th:value="${session.user.getName}" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="edit-email"><i
-                                        class="fas fa-envelope auth-input-icon"></i> Email Address</label>
-                                <div class="auth-input-group">
-                                    <input type="email" class="form-input" id="edit-email"
-                                        th:value="${session.user.getEmail}" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="edit-enroll"><i
-                                        class="fas fa-id-card auth-input-icon"></i> Enrollment Number</label>
-                                <div class="auth-input-group">
-                                    <input type="text" class="form-input" id="edit-enroll"
-                                        th:value="${session.user.getEnrollmentNumber}" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="edit-phone"><i class="fas fa-phone auth-input-icon"> </i>
-                                    Phone Number</label>
-                                <div class="auth-input-group">
-                                    <input type="tel" class="form-input" id="edit-phone"
-                                        th:value="${session.user.getContact}" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="edit-address"><i class="fas fa-building"></i>
-                                    Department</label>
-                                <div class="auth-input-group">
-                                    <input type="text" class="form-input" id="edit-address"
-                                        th:value="${session.user.getDepartment}" required>
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="button" class="btn btn-secondary" id="cancel-edit-btn">
-                                    <i class="fas fa-times"></i> Cancel
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save"></i> Save Changes
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="dashboard-sidebar">
-                    <div class="sidebar-section">
-                        <h3>Account Actions</h3>
-                        <div class="action-buttons">
-                            <!-- <button class="btn btn-outline btn-block" id="change-password-btn">
-                                <i class="fas fa-key"></i> Change Password
-                            </button> -->
-                            <button class="btn btn-secondary btn-block" id="logout-btn">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                            <button class="btn btn-danger btn-block" id="delete-account-btn">
-                                <i class="fas fa-trash"></i> Delete Account
-                            </button>
+                            </form>
                         </div>
                     </div>
 
-                    <div class="sidebar-section">
-                        <h3>Quick Links</h3>
-                        <div class="quick-links">
-                            <a href="order" class="quick-link">
-                                <i class="fas fa-shopping-bag"></i> My Orders
-                            </a>
-                            <a href="wishlist" class="quick-link">
-                                <i class="fas fa-heart"></i> Wishlist
-                            </a>
-                            <a href="history" class="quick-link">
-                                <i class="fas fa-history"></i> Order History
-                            </a>
+                    <!-- Sidebar -->
+                    <div class="dashboard-sidebar">
+                        <div class="sidebar-section">
+                            <h3>Account Actions</h3>
+                            <div class="action-buttons">
+                                <!-- <button class="btn btn-outline btn-block" id="change-password-btn">
+                                <i class="fas fa-key"></i> Change Password
+                            </button> -->
+                                <button class="btn btn-secondary btn-block" onclick="logout()" id="logout-btn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                                <button class="btn btn-danger btn-block" id="delete-account-btn">
+                                    <i class="fas fa-trash"></i> Delete Account
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer Component -->
-    <section th:replace="~{footer :: footer}"></section>
+        <!-- Footer Component -->
+        <section th:replace="~{footer :: footer}"></section>
 
-    <!-- Modular JavaScript -->
-    <script src="js/utils.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/toast.js"></script>
-    <script src="js/navbar.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/wishlist.js"></script>
-    <script src="js/app.js"></script>
+        <!-- Modular JavaScript -->
+        <script src="js/utils.js"></script>
+        <script src="js/theme.js"></script>
+        <script src="js/toast.js"></script>
+        <script src="js/navbar.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/wishlist.js"></script>
+        <script src="js/app.js"></script>
 
-    <!-- Page-specific JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Profile edit functionality
-            const editBtn = document.getElementById('edit-profile-btn');
-            const cancelBtn = document.getElementById('cancel-edit-btn');
-            const profileView = document.getElementById('profile-view');
-            const profileEdit = document.getElementById('profile-edit');
-            const profileForm = document.getElementById('profile-form');
-
-            // Toggle edit mode
-            editBtn.addEventListener('click', () => {
-                profileView.classList.add('hidden');
-                profileEdit.classList.remove('hidden');
-                editBtn.classList.add('hidden');
-            });
-
-            cancelBtn.addEventListener('click', () => {
-                profileView.classList.remove('hidden');
-                profileEdit.classList.add('hidden');
-                editBtn.classList.remove('hidden');
-            });
-
-            // Profile photo upload
-            const uploadPhotoBtn = document.getElementById('upload-photo-btn');
-            const profilePhotoInput = document.getElementById('profile-photo');
-            const profilePhotoPreview = document.getElementById('profile-photo-preview');
-
-            uploadPhotoBtn.addEventListener('click', () => {
-                profilePhotoInput.click();
-            });
-
-            profilePhotoInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        profilePhotoPreview.src = event.target.result;
-                        toast.info('Photo selected. Click Save Changes to update.');
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Save profile changes
-            profileForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const name = document.getElementById('edit-name').value;
-                const email = document.getElementById('edit-email').value;
-                const enroll = document.getElementById('edit-enroll').value;
-                const phone = document.getElementById('edit-phone').value;
-                const address = document.getElementById('edit-address').value;
-
-                // Update display
-                document.getElementById('display-name').textContent = name;
-                document.getElementById('display-email').textContent = email;
-                document.getElementById('display-enroll').textContent = enroll;
-                document.getElementById('display-phone').textContent = phone;
-                document.getElementById('display-address').textContent = address;
-                document.getElementById('profile-photo-display').src = profilePhotoPreview.src;
-
-                // Switch back to view mode
-                profileView.classList.remove('hidden');
-                profileEdit.classList.add('hidden');
-                editBtn.classList.remove('hidden');
-
-                toast.success('Profile updated successfully!');
-            });
-
-            // Logout functionality
-            const logoutBtn = document.getElementById('logout-btn');
-            const mobileLogoutBtn = document.getElementById('mobile-logout');
-
-            const handleLogout = () => {
+        <!-- Page-specific JavaScript -->
+        <script>
+            function logout() {
                 if (confirm('Are you sure you want to logout?')) {
                     window.location.href = 'logout';
                     toast.info('Logging out...');
@@ -315,46 +214,97 @@
                     }, 1000);
                 }
             };
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                // Profile edit functionality
+                const editBtn = document.getElementById('edit-profile-btn');
+                const cancelBtn = document.getElementById('cancel-edit-btn');
+                const profileView = document.getElementById('profile-view');
+                const profileEdit = document.getElementById('profile-edit');
+                const profileForm = document.getElementById('profile-form');
 
-            logoutBtn.addEventListener('click', handleLogout);
-            mobileLogoutBtn.addEventListener('click', handleLogout);
 
-            // Change password (placeholder)
-            // const changePasswordBtn = document.getElementById('change-password-btn');
-            // changePasswordBtn.addEventListener('click', () => {
-            //     toast.info('Change password feature coming soon!');
-            // });
-        });
-        // Delete account functionality
-        const deleteAccountBtn = document.getElementById('delete-account-btn');
-        console.log("Delete : " + deleteAccountBtn);
-        deleteAccountBtn.addEventListener('click', () => {
-            const confirmation = prompt('To delete your account, type "DELETE" to confirm:');
-            if (confirmation === 'DELETE') {
-                if (confirm('This action cannot be undone. Are you sure you want to permanently delete your account?')) {
-                    toast.info('Deleting account...');
-                    window.location.href = 'deleteAccount';
-                    const result = response.text();
-                    if (result == 'success') {
-                        setTimeout(() => {
-                            toast.success('Account deleted successfully');
-                            setTimeout(() => {
-                                window.location.href = 'home';
-                            }, 1500);
-                        }, 2000);
-                    }else
-                    {
-                        toast.error("Something Went Wrong. Could't Delete Account");
-                        setTimeout(() => {
-                                window.location.href = 'profile';
-                        }, 2000);
+                // Profile photo upload
+                const uploadPhotoBtn = document.getElementById('upload-photo-btn');
+                const profilePhotoInput = document.getElementById('profile-photo');
+                const profilePhotoPreview = document.getElementById('profile-photo-preview');
+
+                uploadPhotoBtn.addEventListener('click', () => {
+                    profilePhotoInput.click();
+                });
+
+                profilePhotoInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            profilePhotoPreview.src = event.target.result;
+                            toast.info('Photo selected. Click Save Changes to update.');
+                        };
+                        reader.readAsDataURL(file);
                     }
+                });
+
+                // Save profile changes
+                profileForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const name = document.getElementById('edit-name').value;
+                    const email = document.getElementById('edit-email').value;
+                    const enroll = document.getElementById('edit-enroll').value;
+                    const phone = document.getElementById('edit-phone').value;
+                    const address = document.getElementById('edit-address').value;
+
+                    // Update display
+                    document.getElementById('display-name').textContent = name;
+                    document.getElementById('display-email').textContent = email;
+                    document.getElementById('display-enroll').textContent = enroll;
+                    document.getElementById('display-phone').textContent = phone;
+                    document.getElementById('display-address').textContent = address;
+                    document.getElementById('profile-photo-display').src = profilePhotoPreview.src;
+
+                    // Switch back to view mode
+                    profileView.classList.remove('hidden');
+                    profileEdit.classList.add('hidden');
+                    editBtn.classList.remove('hidden');
+
+                    toast.success('Profile updated successfully!');
+                });
+
+                // Logout functionality
+                const logoutBtn = document.getElementById('logout-btn');
+                const mobileLogoutBtn = document.getElementById('mobile-logout');
+
+            });
+            // Delete account functionality
+            const deleteAccountBtn = document.getElementById('delete-account-btn');
+            console.log("Delete : " + deleteAccountBtn);
+            deleteAccountBtn.addEventListener('click', () => {
+                const confirmation = prompt('To delete your account, type "DELETE" to confirm:');
+                if (confirmation === 'DELETE') {
+                    if (confirm('This action cannot be undone. Are you sure you want to permanently delete your account?')) {
+                        toast.info('Deleting account...');
+                        window.location.href = 'deleteAccount';
+                        const result = response.text();
+                        if (result == 'success') {
+                            setTimeout(() => {
+                                toast.success('Account deleted successfully');
+                                setTimeout(() => {
+                                    window.location.href = 'home';
+                                }, 1500);
+                            }, 2000);
+                        } else {
+                            toast.error("Something Went Wrong. Could't Delete Account");
+                            setTimeout(() => {
+                                window.location.href = 'profile';
+                            }, 2000);
+                        }
+                    }
+                } else if (confirmation !== null) {
+                    toast.error('Invalid confirmation. Account not deleted.');
                 }
-            } else if (confirmation !== null) {
-                toast.error('Invalid confirmation. Account not deleted.');
-            }
-        });
-    </script>
+            });
+        </script>
 
 </body>
 

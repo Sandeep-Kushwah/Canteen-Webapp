@@ -10,8 +10,10 @@
 
 const authBtn = document.getElementById("login-register-click");
 const link = document.getElementById("login-register-href");
-const icon = link.querySelector("i");
-const currentPage = window.location.pathname;
+const adminLogoutHide = document.getElementById("adminLogoutHide");
+// const icon = link.querySelector("i");
+// const currentPage = window.location.pathname; 
+const currentPage = window.location.pathname.split('/').pop(); //ye pahale upar wale jesa tha tha
 
 if (currentPage.includes("login")) {
     authBtn.innerText = "Register";

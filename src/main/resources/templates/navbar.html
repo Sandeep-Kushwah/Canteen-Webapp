@@ -11,10 +11,10 @@
         <div class="navbar-menu">
             <a href="home" class="navbar-link active" data-page="home">Home</a>
             <a href="order" class="navbar-link" data-page="orders">Orders</a>
-            <a href="wishlist" class="navbar-link" data-page="wishlist">
+            <!-- <a href="wishlist" class="navbar-link" data-page="wishlist">
                 WishList
                 <span class="badge badge-primary wishlist-count hidden">0</span>
-            </a>
+            </a> -->
             <a href="history" class="navbar-link" data-page="history">History</a>
         </div>
 
@@ -30,12 +30,6 @@
             <button class="theme-toggle" aria-label="Toggle theme">
                 <i class="fas fa-moon theme-toggle-icon" id="theme-icon"></i>
             </button>
-
-            <!-- Cart -->
-            <a href="order" class="btn btn-primary btn-sm cart-btn">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-primary cart-count hidden">0</span>
-            </a>
 
             <!-- Login/Profile -->
             <a th:if="${session.user == null}" id="login-register-href" href="login"

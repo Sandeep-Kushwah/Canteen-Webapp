@@ -29,107 +29,134 @@
                     <p>Manage orders and track customer activity</p>
                 </div>
                 <div class="dashboard-actions">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-download"></i> Export
-                    </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" onclick="location.reload()">
                         <i class="fas fa-sync"></i> Refresh
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Orders Table -->
-        <div class="dashboard-main">
-            <div class="section-header">
-                <h2>Current Orders</h2>
-                <div class="section-header-actions">
-                    <select class="form-select" style="width: auto;">
-                        <option value="all">All Status</option>
-                        <option value="pending">Pending</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
+        <!-- Dashboard Content -->
+        <div class="container">
+            <!-- Admin Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Orders</div>
+                        <div class="stat-value" th:text="${session.adminTotalOrders}">---</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Pending</div>
+                        <div class="stat-value" th:text="${session.adminTotalPendingOrders}">---</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-label">Completed</div>
+                        <div class="stat-value" th:text="${session.adminTotalCompletedOrders}">---</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>User</th>
-                            <th>Price × Qty</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-status="pending">
-                            <td>
-                                <div class="flex-center" style="gap: var(--spacing-sm);">
-                                    <i class="fas fa-utensils" style="color: var(--primary-color);"></i>
-                                    <span>Food</span>
-                                </div>
-                            </td>
-                            <td>itz_sandeep_111</td>
-                            <td>₹60 × 1</td>
-                            <td>₹60</td>
-                            <td>
-                                <span class="order-status pending">
-                                    <i class="fas fa-clock"></i> Pending
-                                </span>
-                            </td>
-                            <td>
-                                <div class="flex-center" style="gap: var(--spacing-xs);">
-                                    <button class="btn btn-sm btn-success complete-order">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger cancel-order">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr data-status="pending">
-                            <td>
-                                <div class="flex-center" style="gap: var(--spacing-sm);">
-                                    <i class="fas fa-hamburger" style="color: var(--primary-color);"></i>
-                                    <span>Burger</span>
-                                </div>
-                            </td>
-                            <td>itz_ratnesh_111</td>
-                            <td>₹60 × 2</td>
-                            <td>₹120</td>
-                            <td>
-                                <span class="order-status pending">
-                                    <i class="fas fa-clock"></i> Pending
-                                </span>
-                            </td>
-                            <td>
-                                <div class="flex-center" style="gap: var(--spacing-xs);">
-                                    <button class="btn btn-sm btn-success complete-order">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger cancel-order">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <!-- Orders Table -->
+            <div class="dashboard-main">
+                <div class="section-header">
+                    <h2>Current Orders</h2>
+                    <div class="section-header-actions">
+                        <select class="form-select" style="width: auto;">
+                            <option value="all">All Status</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="COMPLETED">Completed</option>
+                            <option value="CANCELED">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
 
-            <!-- Empty State (hidden by default) -->
-            <div class="empty-state hidden" id="empty-orders">
-                <i class="fas fa-inbox fa-3x"></i>
-                <h3>No Orders</h3>
-                <p>There are no pending orders at the moment</p>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>User</th>
+                                <th>Time</th>
+                                <th>Price × Qty</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <th:block th:if="${orders != null}" th:each="orders : ${orders}">
+
+                            <tbody>
+                                <tr th:data-status="${orders.orderStatus}">
+                                    <td>
+                                        <div class="flex" style="gap: var(--spacing-sm);">
+                                            <div class="adminItemsImg">
+                                                <img th:src="${orders.item.imageFile}" alt="img">
+                                            </div>
+                                            <span class="adminItemName"
+                                                th:text="${orders.item.itemName}">ItemName</span>
+                                        </div>
+                                    </td>
+                                    <td th:text="${orders.user.name}">Username</td>
+                                    <td th:text="${#temporals.format(orders.orderTime, 'dd/MM/yyyy hh:mm a')}">Time</td>
+                                    <td><span>₹</span><span th:text="${orders.item.price}">price</span><span> ×
+                                        </span><span th:text="${orders.quantity}">Quantity</span></td>
+                                    <td>₹<span th:text="${orders.item.price * orders.quantity}">total</span></td>
+                                    <td>
+                                        <span class="order-status completed"
+                                            th:if="${orders.orderStatus.toString() == 'COMPLETED'}">
+                                            <i class="fas fa-check-circle"></i> Completed
+                                        </span>
+                                        <span class="order-status pending"
+                                            th:if="${orders.orderStatus.toString() == 'PENDING'}">
+                                            <i class="fas fa-clock"></i> Pending
+                                        </span>
+                                        <span class="order-status cancelled"
+                                            th:if="${orders.orderStatus.toString() == 'CANCELED'}">
+                                            <i class="fas fa-cancel"></i> Cancelled
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="flex-center" style="gap: var(--spacing-xs);">
+                                            <button class="btn btn-sm btn-success complete-order order-buttons"
+                                                th:data-id="${orders.orderId}" th:data-status="COMPLETED">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger cancel-order order-buttons"
+                                                th:data-id="${orders.orderId}" th:data-status="CANCELED">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </th:block>
+                    </table>
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state" id="empty-orders" th:if="${orders == null}">
+                    <i class="fas fa-inbox fa-3x"></i>
+                    <h3>No Orders</h3>
+                    <p>There are no pending orders at the moment</p>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Modular JavaScript -->
@@ -176,34 +203,48 @@
                 });
             });
 
-            // Complete order button
-            document.querySelectorAll('.complete-order').forEach(btn => {
-                btn.addEventListener('click', () => {
+            // Complete and cancel order button functionallity
+            const orderButton = document.querySelectorAll(".order-buttons");
+            orderButton.forEach(btn => {
+                btn.addEventListener('click', async () => {
+
+                    const formData = new FormData();
+
+                    const id = btn.dataset.id;
+                    const status = btn.dataset.status;
+
+                    formData.append("id", id);
+                    formData.append("status", status);
+
+                    // alert("ID : " + id + "status  : " + status);
+
+                    const response = await fetch('/admin/adminAction', {
+                        method: 'POST',
+                        body: formData
+                    });
+
                     const row = btn.closest('tr');
                     const statusSpan = row.querySelector('.order-status');
+                    const result = await response.text();
 
-                    if (confirm('Mark this order as completed?')) {
-                        statusSpan.className = 'order-status completed';
-                        statusSpan.innerHTML = '<i class="fas fa-check-circle"></i> Completed';
-                        row.dataset.status = 'completed';
-                        toast.success('Order marked as completed');
+                    if (result == 'success') {
+                        if (status == 'COMPLETED') {
+                            statusSpan.className = 'order-status completed';
+                            statusSpan.innerHTML = '<i class="fas fa-check-circle"></i> Completed';
+                            row.dataset.status = 'completed';
+                            toast.success('Order marked as completed');
+                        }
+                        // window.location.href="home";
+                        if (status == 'CANCELED'){
+                            statusSpan.className = 'order-status cancelled';
+                            statusSpan.innerHTML = '<i class="fas fa-cancel"></i> Cancelled';
+                            row.dataset.status = 'cancelled';
+                            toast.success('Order marked as cancelled');
+                        }
+                    } else{
+                        toast.error('Something went wrong')
                     }
-                });
-            });
-
-            // Cancel order button
-            document.querySelectorAll('.cancel-order').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const row = btn.closest('tr');
-                    const statusSpan = row.querySelector('.order-status');
-
-                    if (confirm('Cancel this order?')) {
-                        statusSpan.className = 'order-status cancelled';
-                        statusSpan.innerHTML = '<i class="fas fa-times-circle"></i> Cancelled';
-                        row.dataset.status = 'cancelled';
-                        toast.success('Order cancelled');
-                    }
-                });
+                })
             });
         });
     </script>
