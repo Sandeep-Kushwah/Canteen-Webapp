@@ -6,6 +6,7 @@ A simple Java project for managing canteen operations like menu handling, order 
 - Add food items
 - View menu
 - Place order
+- Track order
 - Manage canteen records
 - Orders History 
 
